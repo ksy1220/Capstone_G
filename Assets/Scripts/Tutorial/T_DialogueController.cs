@@ -8,9 +8,9 @@ public class T_DialogueController : DialogueController
     [SerializeField]
     Sprite[] penguinSprites;
 
-    protected override void Action(string action)
+    protected override void DoAction(string action)
     {
-        TutorialManager.instance.Action(action);
+        TutorialManager.instance.DoAction(action);
     }
 
     protected override Sprite GetSprite(string charName, string spriteName)

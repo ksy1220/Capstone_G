@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/*
+    선택지 버튼에 부착합니다.
+*/
 public class DialogueOption : MonoBehaviour
 {
     int index;
@@ -11,7 +14,8 @@ public class DialogueOption : MonoBehaviour
     Button button;
     TextMeshProUGUI optionText;
     string nextCategory;
-    DialogueController dialogueController;
+    DialogueController dialogueController { get { return DialogueController.instance; } }
+    OptionManager optionManager { get { return OptionManager.instance; } }
 
     void Awake()
     {
@@ -27,11 +31,6 @@ public class DialogueOption : MonoBehaviour
         optionText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
     }
 
-    public void SetDialogueController(DialogueController dialogueController)
-    {
-        this.dialogueController = dialogueController;
-    }
-
     public void SetOption(string optionName, string optionText, string nextCategory)
     {
         this.optionName = optionName;
@@ -41,15 +40,29 @@ public class DialogueOption : MonoBehaviour
 
     void OnChooseOption()
     {
-        dialogueController.StartDialogue(nextCategory);
+        if (dialogueController == null)
+        {
+            Debug.LogError("DialogueController is null");
+            return;
+        }
 
+        dialogueController.StartDialogue(nextCategory);
+        TakeActionOnChoice();
         SaveChoice();
+    }
+
+    void TakeActionOnChoice()
+    {
+        if (optionManager == null)
+        {
+            Debug.LogError("OptionManager is null");
+            return;
+        }
+        optionManager.TakeAction(optionName, index);
     }
 
     void SaveChoice()
     {
-        Debug.Log($"option {index}: {optionName}");
+
     }
-
-
 }

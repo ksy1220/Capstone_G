@@ -3,31 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
-    DialogueController와 연결,
     튜토리얼에 나오는 대화와 액션 등을 관리합니다.
 */
-public class TutorialManager : MonoBehaviour
+public class TutorialManager : StageManager
 {
-    public static TutorialManager instance = null;
-
-    // 현재 씬의 Dialogue Canvas에 부착된 컨트롤러
-    [SerializeField]
-    protected DialogueController dialogueController;
-
-    void Awake()
-    {
-        if (instance == null)
-            instance = this;
-        else
-            Destroy(this.gameObject);
-    }
-
     void Start()
     {
+        Instantiate(new GameObject("@OptionManager")).AddComponent<T_OptionManager>();
+
         dialogueController.StartDialogue("tutorial_0");
     }
 
-    public void Action(string action)
+    public override void DoAction(string action)
     {
         switch (action)
         {
@@ -37,7 +24,7 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    public void PrintHi()
+    void PrintHi()
     {
         Debug.Log("Hi");
     }

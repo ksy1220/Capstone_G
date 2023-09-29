@@ -11,6 +11,8 @@ using System.Collections.Generic;
 */
 public class DialogueController : MonoBehaviour
 {
+    public static DialogueController instance = null;
+
     [Header("UI")]
 
     // 캐릭터 대사 / 이름 / 알림창 텍스트
@@ -44,8 +46,10 @@ public class DialogueController : MonoBehaviour
 
     protected Dictionary<string, Queue<Dialogue>> dialogues;
 
-    void Awake()
+    protected virtual void Awake()
     {
+        instance = this;
+
         Button touchPanelButton = GetComponent<Button>();
         if (touchPanelButton == null)
             touchPanelButton = TouchPanel.AddComponent<Button>();
@@ -55,7 +59,6 @@ public class DialogueController : MonoBehaviour
         dialougeToggleGroup.allowSwitchOff = true;
         SetDialogues();
 
-        ConnectToOptions();
         ToggleInteractionOff();
     }
 
@@ -73,20 +76,11 @@ public class DialogueController : MonoBehaviour
         dialogues = CSVConverter.GetDialogues(CSVFileName);
     }
 
-    // 선택지 클래스에 연결
-    protected void ConnectToOptions()
-    {
-        foreach (Transform option in optionsParent)
-        {
-            option.GetComponent<DialogueOption>().SetDialogueController(this);
-        }
-    }
-
     // 카테고리 이름으로 대화 시작
     public void StartDialogue(string category)
     {
-        DialogueManager.SetCurrentDialogues(dialogues[category]);
-        DialogueManager.MoveNext(this);
+        DialogueUtils.SetCurrentDialogues(dialogues[category]);
+        DialogueUtils.MoveNext();
     }
 
     // 대화창 세팅
@@ -138,7 +132,7 @@ public class DialogueController : MonoBehaviour
                         optionObject.SetActive(true);
 
                         if (i < optionNum - 1)
-                            dialogue = DialogueManager.GetNextDialogue();
+                            dialogue = DialogueUtils.GetNextDialogue();
                     }
                     else
                         optionObject.SetActive(false);
@@ -155,7 +149,7 @@ public class DialogueController : MonoBehaviour
 
         if (dialogue.action != "")
         {
-            Action(dialogue.action);
+            DoAction(dialogue.action);
         }
 
         if (dialogue.nextCategory != "")
@@ -165,7 +159,7 @@ public class DialogueController : MonoBehaviour
     }
 
     // 오버라이드 필요
-    protected virtual void Action(string action)
+    protected virtual void DoAction(string action)
     {
 
     }
@@ -178,7 +172,7 @@ public class DialogueController : MonoBehaviour
     // 다음 대화 카테고리 시작
     void SetNextDialogues(string category)
     {
-        DialogueManager.SetCurrentDialogues(dialogues[category]);
+        DialogueUtils.SetCurrentDialogues(dialogues[category]);
     }
 
     void SetTouchPanelOn()
@@ -190,7 +184,7 @@ public class DialogueController : MonoBehaviour
     // 터치 입력을 받는 패널의 버튼에 연결
     void OnClickMoveNext()
     {
-        DialogueManager.MoveNext(this);
+        DialogueUtils.MoveNext();
     }
 
     // 대화 종료 후 모든 대화창 끄기

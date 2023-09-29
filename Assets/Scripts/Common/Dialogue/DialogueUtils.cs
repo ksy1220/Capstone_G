@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class DialogueManager
+public static class DialogueUtils
 {
     static Queue<Dialogue> currentDialogues;
 
@@ -10,30 +10,35 @@ public static class DialogueManager
     {
         if (dialogues == null)
         {
-            Debug.LogError("DialogueManager: invalid input");
+            Debug.LogError("DialogueUtils: invalid input");
             return;
         }
 
         currentDialogues = dialogues;
     }
 
-    public static void MoveNext(DialogueController dialogueUI)
+    public static void MoveNext()
     {
         if (currentDialogues == null)
         {
-            Debug.LogError("DialogueManager: currentDialogues is null");
+            Debug.LogError("DialogueUtils: currentDialogues is null");
             return;
+        }
+
+        if (DialogueController.instance == null)
+        {
+            Debug.LogError("DialogueUtils: DialogueController is null");
         }
 
         if (currentDialogues.Count == 0)
         {
             Debug.Log("End of dialogues");
-            dialogueUI.EndDialogue();
+            DialogueController.instance.EndDialogue();
             return;
         }
 
         Dialogue currentDialogue = GetNextDialogue();
-        dialogueUI.SetDialogueUI(currentDialogue);
+        DialogueController.instance.SetDialogueUI(currentDialogue);
     }
 
     public static Dialogue GetNextDialogue()
@@ -43,6 +48,10 @@ public static class DialogueManager
 
     public static void SkipDialogue()
     {
-        currentDialogues = null;
+        while (currentDialogues.Count > 0 && !currentDialogues.Peek().type.Contains("선택지"))
+        {
+            MoveNext();
+        }
+
     }
 }
