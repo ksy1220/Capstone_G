@@ -32,8 +32,13 @@ public static class DialogueManager
             return;
         }
 
-        Dialogue currentDialogue = currentDialogues.Dequeue();
+        Dialogue currentDialogue = GetNextDialogue();
         dialogueUI.SetDialogueUI(currentDialogue);
+    }
+
+    public static Dialogue GetNextDialogue()
+    {
+        return currentDialogues.Dequeue();
     }
 
     public static void SkipDialogue()

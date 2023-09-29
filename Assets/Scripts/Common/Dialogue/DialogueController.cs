@@ -44,8 +44,6 @@ public class DialogueController : MonoBehaviour
 
     protected Dictionary<string, Queue<Dialogue>> dialogues;
 
-    Sprite blankSprite;
-
     void Awake()
     {
         Button touchPanelButton = GetComponent<Button>();
@@ -56,6 +54,17 @@ public class DialogueController : MonoBehaviour
 
         dialougeToggleGroup.allowSwitchOff = true;
         SetDialogues();
+
+        ConnectToOptions();
+        ToggleInteractionOff();
+    }
+
+    // 토글 터치 후 꺼짐 방지
+    void ToggleInteractionOff()
+    {
+        characterLineToggle.interactable = false;
+        noticeToggle.interactable = false;
+        optionToggle.interactable = false;
     }
 
     // 씬 전체에서 사용할 대사 불러오기
@@ -64,12 +73,23 @@ public class DialogueController : MonoBehaviour
         dialogues = CSVConverter.GetDialogues(CSVFileName);
     }
 
+    // 선택지 클래스에 연결
+    protected void ConnectToOptions()
+    {
+        foreach (Transform option in optionsParent)
+        {
+            option.GetComponent<DialogueOption>().SetDialogueController(this);
+        }
+    }
+
+    // 카테고리 이름으로 대화 시작
     public void StartDialogue(string category)
     {
         DialogueManager.SetCurrentDialogues(dialogues[category]);
         DialogueManager.MoveNext(this);
     }
 
+    // 대화창 세팅
     public void SetDialogueUI(Dialogue dialogue)
     {
         switch (dialogue.type)
@@ -114,13 +134,19 @@ public class DialogueController : MonoBehaviour
                     GameObject optionObject = optionsParent.GetChild(i).gameObject;
                     if (i < optionNum)
                     {
-                        optionObject.GetComponent<DialogueOption>().SetOptionName(dialogue.optionName);
+                        optionObject.GetComponent<DialogueOption>().SetOption(dialogue.optionName, dialogue.text, dialogue.nextCategory);
                         optionObject.SetActive(true);
+
+                        if (i < optionNum - 1)
+                            dialogue = DialogueManager.GetNextDialogue();
                     }
                     else
                         optionObject.SetActive(false);
                 }
                 return;
+
+            case "액션":
+                break;
 
             default:
                 Debug.LogError("DialogueController: invalid type");
@@ -138,7 +164,7 @@ public class DialogueController : MonoBehaviour
         }
     }
 
-    // need overriding
+    // 오버라이드 필요
     protected virtual void Action(string action)
     {
 
@@ -149,6 +175,7 @@ public class DialogueController : MonoBehaviour
         return null;
     }
 
+    // 다음 대화 카테고리 시작
     void SetNextDialogues(string category)
     {
         DialogueManager.SetCurrentDialogues(dialogues[category]);
@@ -166,9 +193,11 @@ public class DialogueController : MonoBehaviour
         DialogueManager.MoveNext(this);
     }
 
+    // 대화 종료 후 모든 대화창 끄기
     public void EndDialogue()
     {
         dialougeToggleGroup.SetAllTogglesOff();
+        TouchPanel.SetActive(false);
     }
 
 }
