@@ -14,7 +14,7 @@ public class OptionManager : MonoBehaviour
         instance = this;
     }
 
-    public virtual void TakeAction(string optionName, int index)
+    public virtual void DoAction(string optionName, int index)
     {
 
     }

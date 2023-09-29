@@ -47,18 +47,18 @@ public class DialogueOption : MonoBehaviour
         }
 
         dialogueController.StartDialogue(nextCategory);
-        TakeActionOnChoice();
+        DoActionOnChoice();
         SaveChoice();
     }
 
-    void TakeActionOnChoice()
+    void DoActionOnChoice()
     {
         if (optionManager == null)
         {
             Debug.LogError("OptionManager is null");
             return;
         }
-        optionManager.TakeAction(optionName, index);
+        optionManager.DoAction(optionName, index);
     }
 
     void SaveChoice()

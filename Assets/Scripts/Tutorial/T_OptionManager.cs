@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class T_OptionManager : OptionManager
 {
-    public override void TakeAction(string optionName, int index)
+    public override void DoAction(string optionName, int index)
     {
         switch (optionName)
         {
