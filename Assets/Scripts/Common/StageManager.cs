@@ -9,11 +9,14 @@ using UnityEngine;
 public class StageManager : MonoBehaviour
 {
     public static StageManager instance = null;
-    protected DialogueController dialogueController { get { return DialogueController.instance; } }
+    [SerializeField]
+    protected DialogueController dialogueController;
 
     protected virtual void Awake()
     {
         instance = this;
+
+        dialogueController.gameObject.SetActive(true);
     }
 
     public virtual void DoAction(string action)

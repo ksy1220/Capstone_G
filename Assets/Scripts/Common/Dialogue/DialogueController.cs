@@ -140,6 +140,7 @@ public class DialogueController : MonoBehaviour
                 return;
 
             case "액션":
+                dialougeToggleGroup.SetAllTogglesOff();
                 break;
 
             default:
@@ -158,12 +159,12 @@ public class DialogueController : MonoBehaviour
         }
     }
 
-    // 오버라이드 필요
-    protected virtual void DoAction(string action)
+    protected void DoAction(string action)
     {
-
+        StageManager.instance.DoAction(action);
     }
 
+    // 오버라이드 필요
     protected virtual Sprite GetSprite(string charName, string spriteName)
     {
         return null;
