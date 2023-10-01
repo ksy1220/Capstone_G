@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class Stage2Manager : StageManager
 {
     [SerializeField]
-    Toggle HomeBG, SchoolBG;
+    GameObject HomeBG, SchoolBG;
     [SerializeField]
     GameObject BackgroundCanvas, MiniGameCanvas;
+
+    GameObject currentBG;
 
     void Start()
     {
@@ -39,11 +41,14 @@ public class Stage2Manager : StageManager
         }
     }
 
-    void ChangeBG(Toggle BGToggle)
+    void ChangeBG(GameObject BGObject)
     {
         if (!BackgroundCanvas.activeSelf)
             BackgroundCanvas.SetActive(true);
 
-        BGToggle.isOn = true;
+        if (currentBG != null)
+            currentBG.SetActive(false);
+        BGObject.SetActive(true);
+        currentBG = BGObject;
     }
 }
