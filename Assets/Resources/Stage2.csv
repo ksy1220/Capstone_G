@@ -1,0 +1,14 @@
+﻿category,type,name,text,sprite,action,optionName,nextCategory
+intro,대사,펭순이,첫 동아리 엠티다. 너무 신나!,,,,
+intro,대사,펭순이,일단 밥을 먹자.,,,,
+intro,대사,펭순이,냠냠.,,,,
+intro,대사,펭순이,헉.. 이러다 늦겠어!,,,,
+intro,대사,펭순이,다녀오겠습니다!,,,,school
+,,,,,,,
+school,액션,,,,ToSchool,,
+school,대사,펭순이,무사히 도착했다.,,,,
+school,대사,펭순이,안녕 얘들아!,,,,
+school,대사,학생1,됐고 게임부터 하자.,,,,
+school,대사,학생1,펭순이가! 좋아하는! 랜덤~게임!,,,,
+school,대사,학생1,무슨~게임! 게임~스타트!,,,,
+school,액션,,,,StartMiniGame,,
