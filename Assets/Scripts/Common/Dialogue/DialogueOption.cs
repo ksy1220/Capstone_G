@@ -55,7 +55,7 @@ public class DialogueOption : MonoBehaviour
     {
         if (optionManager == null)
         {
-            Debug.LogError("OptionManager is null");
+            Debug.Log("OptionManager is null");
             return;
         }
         optionManager.DoAction(optionName, index);

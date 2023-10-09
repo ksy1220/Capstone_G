@@ -21,4 +21,6 @@ public class Dialogue
 
     // 다음 대사 카테고리
     public string nextCategory;
+
+    public int mentalIndex;
 }

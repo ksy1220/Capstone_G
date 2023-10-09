@@ -103,14 +103,11 @@ public class DialogueController : MonoBehaviour
                     characterImage.gameObject.SetActive(true);
                     characterImage.sprite = sprite;
                 }
-
-                SetTouchPanelOn();
                 break;
 
             case "알림":
                 noticeToggle.isOn = true;
                 noticeText.text = dialogue.text;
-                SetTouchPanelOn();
                 break;
 
             case "선택지1":
@@ -147,6 +144,11 @@ public class DialogueController : MonoBehaviour
                 Debug.LogError("DialogueController: invalid type");
                 break;
         }
+
+        if (!dialogue.type.Contains("선택지"))
+            SetTouchPanelOn();
+
+        DataController.instance.SetMentalIndex(dialogue.mentalIndex);
 
         if (dialogue.action != "")
         {
