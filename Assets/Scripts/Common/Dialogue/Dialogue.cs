@@ -16,9 +16,6 @@ public class Dialogue
     // 액션
     public string action;
 
-    // 저장할 선택지 이름
-    public string optionName;
-
     // 다음 대사 카테고리
     public string nextCategory;
 

@@ -1,21 +1,21 @@
-﻿category,type,name,text,sprite,action,optionName,nextCategory,mental
-intro,대사,펭순이,첫 동아리 엠티다. 너무 신나!,,,,,
-intro,대사,펭순이,일단 밥을 먹자.,,,,,
-intro,대사,펭순이,냠냠.,,,,,
-intro,알림,,멘탈지수가 30 상승했습니다.,,,,,30
-intro,대사,펭순이,헉.. 이러다 늦겠어!,,,,,
-intro,대사,펭순이,그래도 밥을 더 먹을까?,,,,,
-intro,선택지2,펭순이,응,,,,eat,
-intro,선택지2,펭순이,아니,,,,school,
-,,,,,,,,
-school,액션,,,,ToSchool,,,
-school,대사,펭순이,무사히 도착했다.,,,,,
-school,대사,펭순이,안녕 얘들아!,,,,,
-school,대사,학생1,됐고 게임부터 하자.,,,,,
-school,알림,,멘탈 -30,,,,,-30
-school,대사,학생1,펭순이가! 좋아하는! 랜덤~게임!,,,,,
-school,대사,학생1,무슨~게임! 게임~스타트!,,,,,
-school,액션,,,,StartMiniGame,,,
-,,,,,,,,
-eat,대사,펭순이,역시 한국인은 밥심이지.,,,,,
-eat,알림,,멘탈지수 100 상승,,,,,100
+﻿category,type,name,text,sprite,action,nextCategory,mental
+intro,대사,펭순이,첫 동아리 엠티다. 너무 신나!,,,,
+intro,대사,펭순이,일단 밥을 먹자.,,,,
+intro,대사,펭순이,냠냠.,,,,
+intro,알림,,멘탈지수가 30 상승했습니다.,,,,30
+intro,대사,펭순이,헉.. 이러다 늦겠어!,,,,
+intro,대사,펭순이,그래도 밥을 더 먹을까?,,,,
+intro,선택지2,펭순이,응,,PrintYes,eat,
+intro,선택지2,펭순이,아니,,PrintNo,school,
+,,,,,,,
+school,액션,,,,ToSchool,,
+school,대사,펭순이,무사히 도착했다.,,,,
+school,대사,펭순이,안녕 얘들아!,,,,
+school,대사,학생1,됐고 게임부터 하자.,,,,
+school,알림,,멘탈 -30,,,,-30
+school,대사,학생1,펭순이가! 좋아하는! 랜덤~게임!,,,,
+school,대사,학생1,무슨~게임! 게임~스타트!,,,,
+school,액션,,,,StartMiniGame,,
+,,,,,,,
+eat,대사,펭순이,역시 한국인은 밥심이지.,,,,
+eat,알림,,멘탈지수 100 상승,,,,100
