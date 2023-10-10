@@ -6,7 +6,7 @@ using UnityEngine;
     스테이지의 대사 및 행동을 관리합니다.
     상속받아 사용하는 클래스
 */
-public class StageManager : MonoBehaviour
+public abstract class StageManager : MonoBehaviour
 {
     public static StageManager instance = null;
     [SerializeField]
@@ -19,8 +19,5 @@ public class StageManager : MonoBehaviour
         dialogueController.gameObject.SetActive(true);
     }
 
-    public virtual void DoAction(string action)
-    {
-
-    }
+    public abstract void DoAction(string action);
 }
