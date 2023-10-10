@@ -9,7 +9,7 @@ using System.Collections.Generic;
     이 클래스를 상속받아 일부 함수를 오버라이드해서 사용,
     각 씬의 Dialogue Canvas에 부착해줍니다.
 */
-public class DialogueController : MonoBehaviour
+public abstract class DialogueController : MonoBehaviour
 {
     public static DialogueController instance = null;
 
@@ -170,10 +170,7 @@ public class DialogueController : MonoBehaviour
     }
 
     // 오버라이드 필요
-    protected virtual Sprite GetSprite(string charName, string spriteName)
-    {
-        return null;
-    }
+    protected abstract Sprite GetSprite(string charName, string spriteName);
 
     // 다음 대화 카테고리 시작
     void SetNextDialogues(string category)
