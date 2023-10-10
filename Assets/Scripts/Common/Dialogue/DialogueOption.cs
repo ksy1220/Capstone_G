@@ -53,12 +53,8 @@ public class DialogueOption : MonoBehaviour
 
     void DoActionOnChoice()
     {
-        if (optionManager == null)
-        {
-            Debug.LogError("OptionManager is null");
-            return;
-        }
-        optionManager.DoAction(optionName, index);
+        if (optionManager != null)
+            optionManager.DoAction(optionName, index);
     }
 
     void SaveChoice()

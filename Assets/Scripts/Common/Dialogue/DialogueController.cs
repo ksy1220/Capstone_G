@@ -103,7 +103,6 @@ public class DialogueController : MonoBehaviour
                     characterImage.gameObject.SetActive(true);
                     characterImage.sprite = sprite;
                 }
-
                 SetTouchPanelOn();
                 break;
 
@@ -141,12 +140,15 @@ public class DialogueController : MonoBehaviour
 
             case "액션":
                 dialougeToggleGroup.SetAllTogglesOff();
+                SetTouchPanelOn();
                 break;
 
             default:
                 Debug.LogError("DialogueController: invalid type");
                 break;
         }
+
+        DataController.instance.SetMentalIndex(dialogue.mentalIndex);
 
         if (dialogue.action != "")
         {
@@ -161,7 +163,10 @@ public class DialogueController : MonoBehaviour
 
     protected void DoAction(string action)
     {
-        StageManager.instance.DoAction(action);
+        if (StageManager.instance)
+            StageManager.instance.DoAction(action);
+        else
+            Debug.LogError("DialogueController: StageManager instance is null");
     }
 
     // 오버라이드 필요
