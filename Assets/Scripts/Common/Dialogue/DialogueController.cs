@@ -103,11 +103,13 @@ public class DialogueController : MonoBehaviour
                     characterImage.gameObject.SetActive(true);
                     characterImage.sprite = sprite;
                 }
+                SetTouchPanelOn();
                 break;
 
             case "알림":
                 noticeToggle.isOn = true;
                 noticeText.text = dialogue.text;
+                SetTouchPanelOn();
                 break;
 
             case "선택지1":
@@ -138,15 +140,13 @@ public class DialogueController : MonoBehaviour
 
             case "액션":
                 dialougeToggleGroup.SetAllTogglesOff();
+                SetTouchPanelOn();
                 break;
 
             default:
                 Debug.LogError("DialogueController: invalid type");
                 break;
         }
-
-        if (!dialogue.type.Contains("선택지"))
-            SetTouchPanelOn();
 
         DataController.instance.SetMentalIndex(dialogue.mentalIndex);
 
@@ -163,7 +163,10 @@ public class DialogueController : MonoBehaviour
 
     protected void DoAction(string action)
     {
-        StageManager.instance.DoAction(action);
+        if (StageManager.instance)
+            StageManager.instance.DoAction(action);
+        else
+            Debug.LogError("DialogueController: StageManager instance is null");
     }
 
     // 오버라이드 필요
