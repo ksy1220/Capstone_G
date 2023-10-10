@@ -127,7 +127,7 @@ public class DialogueController : MonoBehaviour
                     GameObject optionObject = optionsParent.GetChild(i).gameObject;
                     if (i < optionNum)
                     {
-                        optionObject.GetComponent<DialogueOption>().SetOption(dialogue.optionName, dialogue.text, dialogue.nextCategory);
+                        optionObject.GetComponent<DialogueOption>().SetOption(dialogue);
                         optionObject.SetActive(true);
 
                         if (i < optionNum - 1)

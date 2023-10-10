@@ -35,6 +35,12 @@ public class Stage2Manager : StageManager
                 BackgroundCanvas.SetActive(false);
                 MiniGameCanvas.SetActive(true);
                 break;
+            case "PrintYes":
+                Debug.Log("Yes");
+                break;
+            case "PrintNo":
+                Debug.Log("No");
+                break;
             default:
                 Debug.Log("default action");
                 break;

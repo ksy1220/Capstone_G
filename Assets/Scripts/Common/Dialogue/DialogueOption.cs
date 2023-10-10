@@ -10,12 +10,11 @@ using TMPro;
 public class DialogueOption : MonoBehaviour
 {
     int index;
-    string optionName;
+    Dialogue dialogue;
     Button button;
     TextMeshProUGUI optionText;
-    string nextCategory;
     DialogueController dialogueController { get { return DialogueController.instance; } }
-    OptionManager optionManager { get { return OptionManager.instance; } }
+    StageManager stageManager { get { return StageManager.instance; } }
 
     void Awake()
     {
@@ -31,14 +30,19 @@ public class DialogueOption : MonoBehaviour
         optionText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
     }
 
-    public void SetOption(string optionName, string optionText, string nextCategory)
+    public void SetOption(Dialogue dialogue)
     {
-        this.optionName = optionName;
-        this.optionText.text = optionText;
-        this.nextCategory = nextCategory;
+        this.dialogue = dialogue;
+        this.optionText.text = dialogue.text;
     }
 
     void OnChooseOption()
+    {
+        StartDialogue();
+        DoActionOnChoice();
+    }
+
+    void StartDialogue()
     {
         if (dialogueController == null)
         {
@@ -46,19 +50,17 @@ public class DialogueOption : MonoBehaviour
             return;
         }
 
-        dialogueController.StartDialogue(nextCategory);
-        DoActionOnChoice();
-        SaveChoice();
+        if (dialogue.nextCategory != "")
+            dialogueController.StartDialogue(dialogue.nextCategory);
     }
 
     void DoActionOnChoice()
     {
-        if (optionManager != null)
-            optionManager.DoAction(optionName, index);
-    }
-
-    void SaveChoice()
-    {
-
+        if (stageManager == null)
+        {
+            Debug.LogError("DialogueOption: StageManager instance is null");
+            return;
+        }
+        stageManager.DoAction(dialogue.action);
     }
 }

@@ -9,8 +9,6 @@ public class TutorialManager : StageManager
 {
     void Start()
     {
-        new GameObject("@OptionManager").AddComponent<T_OptionManager>();
-
         dialogueController.StartDialogue("tutorial_0");
     }
 
