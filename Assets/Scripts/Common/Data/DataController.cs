@@ -6,7 +6,19 @@ using Newtonsoft.Json;
 
 public class DataController : MonoBehaviour
 {
-    public static DataController instance = null;
+    static DataController _instance = null;
+
+    public static DataController instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new GameObject("@DataController").AddComponent<DataController>();
+            }
+            return _instance;
+        }
+    }
     [SerializeField]
     GameData gameData;
 
@@ -15,15 +27,21 @@ public class DataController : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
-            instance = this;
+        if (_instance == null)
+        {
+            _instance = this;
+            Init();
+        }
         else
+        {
+            Debug.Log("destroy data controller");
             Destroy(gameObject);
+        }
 
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
+    void Init()
     {
         filePath = Path.Combine(Application.persistentDataPath, fileName);
         LoadData();
