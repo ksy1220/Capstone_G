@@ -5,48 +5,39 @@ using System.Collections.Generic;
 
 /*
     대화 내용에 따라 대화창을 세팅합니다.
-
-    이 클래스를 상속받아 일부 함수를 오버라이드해서 사용,
     각 씬의 Dialogue Canvas에 부착해줍니다.
 */
-public abstract class DialogueController : MonoBehaviour
+public class DialogueController : MonoBehaviour
 {
     public static DialogueController instance = null;
 
     [Header("UI")]
 
     // 캐릭터 대사 / 이름 / 알림창 텍스트
-    [SerializeField]
-    protected TextMeshProUGUI lineText;
-    [SerializeField]
-    protected TextMeshProUGUI nameText;
-    [SerializeField]
-    protected TextMeshProUGUI noticeText;
+    [SerializeField] TextMeshProUGUI lineText;
+    [SerializeField] TextMeshProUGUI nameText;
+    [SerializeField] TextMeshProUGUI noticeText;
 
     // 캐릭터 이미지
-    [SerializeField]
-    protected Image characterImage;
+    [SerializeField] Image characterImage;
     // 캐릭터 대사창 / 알림창 / 선택지창
-    [SerializeField]
-    protected Toggle characterLineToggle, noticeToggle, optionToggle;
+    [SerializeField] Toggle characterLineToggle, noticeToggle, optionToggle;
     // 선택지 부모 트랜스폼
-    [SerializeField]
-    protected Transform optionsParent;
+    [SerializeField] Transform optionsParent;
     // 터치 입력을 받는 패널
-    [SerializeField]
-    protected GameObject TouchPanel;
-    [SerializeField]
-    protected ToggleGroup dialougeToggleGroup;
+    [SerializeField] GameObject TouchPanel;
+    [SerializeField] ToggleGroup dialougeToggleGroup;
 
 
     [Header("대화 파일")]
     // 사용할 csv 대화 파일 이름 
-    [SerializeField]
-    protected string CSVFileName;
+    [SerializeField] string CSVFileName;
 
-    protected Dictionary<string, Queue<Dialogue>> dialogues;
+    Dictionary<string, Queue<Dialogue>> dialogues;
 
-    protected virtual void Awake()
+    SpriteController spriteController;
+
+    void Awake()
     {
         instance = this;
 
@@ -60,6 +51,8 @@ public abstract class DialogueController : MonoBehaviour
         SetDialogues();
 
         ToggleInteractionOff();
+
+        spriteController = SpriteController.GetSpriteController();
     }
 
     // 토글 터치 후 꺼짐 방지
@@ -71,7 +64,7 @@ public abstract class DialogueController : MonoBehaviour
     }
 
     // 씬 전체에서 사용할 대사 불러오기
-    protected void SetDialogues()
+    void SetDialogues()
     {
         dialogues = CSVConverter.GetDialogues(CSVFileName);
     }
@@ -94,7 +87,7 @@ public abstract class DialogueController : MonoBehaviour
                 lineText.text = dialogue.text;
                 nameText.text = dialogue.name;
 
-                Sprite sprite = GetSprite(dialogue.name, dialogue.sprite);
+                Sprite sprite = spriteController.GetSprite(dialogue.name, dialogue.sprite);
 
                 if (sprite == null)
                     characterImage.gameObject.SetActive(false);
@@ -161,16 +154,13 @@ public abstract class DialogueController : MonoBehaviour
         }
     }
 
-    protected void DoAction(string action)
+    void DoAction(string action)
     {
         if (StageManager.instance)
             StageManager.instance.DoAction(action);
         else
             Debug.LogError("DialogueController: StageManager instance is null");
     }
-
-    // 오버라이드 필요
-    protected abstract Sprite GetSprite(string charName, string spriteName);
 
     // 다음 대화 카테고리 시작
     void SetNextDialogues(string category)

@@ -422,7 +422,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC774\uB984\uC774\uB2E4"
+  m_text: "\uD3AD\uC21C\uC774"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e276a07969a37cf49829d7f8616528ba, type: 2}
   m_sharedMaterial: {fileID: 2279698483732340657, guid: e276a07969a37cf49829d7f8616528ba, type: 2}
@@ -603,7 +603,7 @@ GameObject:
   - component: {fileID: 5333047683104997057}
   - component: {fileID: 5333047683104997058}
   - component: {fileID: 5333047683104997070}
-  - component: {fileID: 5333047683104997069}
+  - component: {fileID: 263316010}
   m_Layer: 5
   m_Name: DialogueCanvas
   m_TagString: Untagged
@@ -709,7 +709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AllowSwitchOff: 1
---- !u!114 &5333047683104997069
+--- !u!114 &263316010
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -718,7 +718,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5333047683104997059}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82b78095b58d4324eb60611d4c8f46d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f48b232a4c87ec4e94d155e722a6a5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lineText: {fileID: 5333047683884340665}
@@ -732,8 +732,6 @@ MonoBehaviour:
   TouchPanel: {fileID: 5333047683247030056}
   dialougeToggleGroup: {fileID: 5333047683104997070}
   CSVFileName: Dialogues_Example
-  penguinSprites:
-  - {fileID: 21300000, guid: 901639f1dddd7b04aa3c943786d274d5, type: 3}
 --- !u!1 &5333047683247030056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1456,11 +1454,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC774\uB984\uC774\uB2E4\uC758 \uB300\uC0AC\uB2E4\uC774\uB984\uC774\uB2E4\uC758
-    \uB300\uC0AC\uB2E4 \uC774\uB984\uC774\uB2E4\uC758 \uB300\uC0AC\uB2E4\uC774\uB984\uC774\uB2E4\uC758
-    \uB300\uC0AC\uB2E4\uC774\uB984\uC774\uB2E4\uC758 \uB300\uC0AC\uB2E4\uC774\uB984\uC774\uB2E4\uC758
-    \uB300\uC0AC\uB2E4\uC774\uB984\uC774\uB2E4\uC758 \uB300\uC0AC\uB2E4\uC774\uB984\uC774\uB2E4\uC758
-    \uB300\uC0AC\uB2E4"
+  m_text: "\uC2A4\uD14C\uC774\uC9C0 \uC608\uC2DC"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e276a07969a37cf49829d7f8616528ba, type: 2}
   m_sharedMaterial: {fileID: 2279698483732340657, guid: e276a07969a37cf49829d7f8616528ba, type: 2}

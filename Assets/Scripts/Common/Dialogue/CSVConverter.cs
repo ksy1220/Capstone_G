@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-
 /*
     대화 관련 CSV파일을 읽어와 딕셔너리로 변환합니다.
 */
@@ -13,7 +12,7 @@ public static class CSVConverter
     // CSV파일을 읽어 반환합니다.
     static List<Dictionary<string, object>> ReadData(string CSVName)
     {
-        return CSVReader.Read(CSVName);
+        return CSVReader.Read("csv/" + CSVName);
     }
 
     // 대화 CSV파일을 정리하여 딕셔너리로 반환합니다.

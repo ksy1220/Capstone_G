@@ -9,8 +9,7 @@ using UnityEngine;
 public abstract class StageManager : MonoBehaviour
 {
     public static StageManager instance = null;
-    [SerializeField]
-    protected DialogueController dialogueController;
+    [SerializeField] protected DialogueController dialogueController;
 
     protected virtual void Awake()
     {
