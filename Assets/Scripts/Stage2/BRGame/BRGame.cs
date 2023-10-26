@@ -11,7 +11,6 @@ public class BRGame : MonoBehaviour
     int index = 0;
 
     int currentNum = 1;
-    bool isUserInputDone = false;
     float interval = 0.5f;
 
     // Start is called before the first frame update
@@ -46,7 +45,7 @@ public class BRGame : MonoBehaviour
 
     IEnumerator Game()
     {
-        while (currentNum < 31)
+        while (currentNum <= 31)
         {
             // 플레이어
             if (index % 6 == 5)
@@ -71,14 +70,6 @@ public class BRGame : MonoBehaviour
             index++;
             yield return new WaitForSeconds(interval);
         }
-
-        if (index % 6 == 5)
-        {
-            buttonController.SetButtons(currentNum);
-            yield break;
-        }
-        else
-            units[index % 6].SayNumber(currentNum);
 
         Debug.Log("BR Done");
     }
