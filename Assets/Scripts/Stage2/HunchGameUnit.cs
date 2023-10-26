@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class HunchGameUnit : MonoBehaviour
+public class HunchGameUnit : StudentUnit
 {
     TextMeshProUGUI text;
     void Awake()
     {
-        text = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        text = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
         text.text = "";
     }
 

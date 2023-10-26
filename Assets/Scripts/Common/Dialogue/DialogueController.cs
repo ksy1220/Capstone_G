@@ -72,6 +72,9 @@ public class DialogueController : MonoBehaviour
     // 카테고리 이름으로 대화 시작
     public void StartDialogue(string category)
     {
+        if (!gameObject.activeSelf)
+            gameObject.SetActive(true);
+
         DialogueUtils.SetCurrentDialogues(dialogues[category]);
         DialogueUtils.MoveNext();
     }

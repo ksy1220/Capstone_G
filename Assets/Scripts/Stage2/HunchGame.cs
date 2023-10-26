@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HunchGame : MonoBehaviour
+public class HunchGame : S2_Minigame
 {
     [SerializeField]
     List<HunchGameUnit> units;
@@ -14,7 +14,6 @@ public class HunchGame : MonoBehaviour
     float prob_unitsTroll = 0.1f;
     Coroutine gameCoroutine;
 
-    bool isInputDone = false;
     bool isGameDone = false;
 
     int userNum;
@@ -39,7 +38,6 @@ public class HunchGame : MonoBehaviour
                 break;
             }
 
-
             float interval = Random.Range(0.5f, currNum);
             yield return new WaitForSeconds(interval);
             GetRandomUnit().SayNumber(currNum++);
@@ -47,7 +45,7 @@ public class HunchGame : MonoBehaviour
             yield return null;
         }
 
-        EndGame();
+        base.EndGame(userNum != 0 && userNum != maxNum);
     }
 
     void SaySameNumber()
@@ -68,19 +66,10 @@ public class HunchGame : MonoBehaviour
         return unit;
     }
 
-    void EndGame()
-    {
-        isGameDone = true;
-
-        Debug.Log("End of Hunch game");
-    }
-
     // 유저 입력 버튼에 연결
     public void OnClickButton(int num)
     {
-        if (isInputDone || isGameDone) return;
-
-        isInputDone = true;
+        if (userNum > 0 || isGameDone) return;
 
         userUnit.SayNumber(num);
         userNum = num;
@@ -96,6 +85,7 @@ public class HunchGame : MonoBehaviour
             // 유저 패
             StopCoroutine(gameCoroutine);
             Debug.Log("유저 패");
+            base.EndGame(false);
         }
     }
 }

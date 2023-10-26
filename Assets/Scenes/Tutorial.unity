@@ -478,6 +478,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5333047683104997056, guid: 28f411d668c381141865830a862fd976, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
     - target: {fileID: 5333047683104997059, guid: 28f411d668c381141865830a862fd976, type: 3}
       propertyPath: m_Name
       value: DialogueCanvas

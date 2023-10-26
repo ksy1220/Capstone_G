@@ -14,8 +14,6 @@ public abstract class StageManager : MonoBehaviour
     protected virtual void Awake()
     {
         instance = this;
-
-        dialogueController.gameObject.SetActive(true);
     }
 
     public abstract void DoAction(string action);
