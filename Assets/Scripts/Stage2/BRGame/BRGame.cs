@@ -10,7 +10,7 @@ public class BRGame : MonoBehaviour
     BRGameButtonController buttonController;
     int index = 0;
 
-    int currentNum = 30;
+    int currentNum = 1;
     bool isUserInputDone = false;
     float interval = 0.5f;
 
@@ -40,7 +40,8 @@ public class BRGame : MonoBehaviour
 
     public void AfterUserInput()
     {
-        isUserInputDone = true;
+        // 게임 재개
+        StartCoroutine(Game());
     }
 
     IEnumerator Game()
@@ -52,9 +53,8 @@ public class BRGame : MonoBehaviour
             {
                 Debug.Log($"currentNum: {currentNum}");
                 buttonController.SetButtons(currentNum);
-                // 버튼 활성화 및 대기
-                yield return new WaitUntil(() => isUserInputDone);
-                isUserInputDone = false;
+                index++;
+                yield break;
             }
             else
             {
@@ -75,9 +75,7 @@ public class BRGame : MonoBehaviour
         if (index % 6 == 5)
         {
             buttonController.SetButtons(currentNum);
-            // 버튼 활성화 및 대기
-            yield return new WaitUntil(() => isUserInputDone);
-            isUserInputDone = false;
+            yield break;
         }
         else
             units[index % 6].SayNumber(currentNum);

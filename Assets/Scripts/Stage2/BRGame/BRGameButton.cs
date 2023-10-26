@@ -41,8 +41,9 @@ public class BRGameButton : MonoBehaviour
 
     public void SetText(string text)
     {
-        if (text.CompareTo("31") > 0)
+        if (int.Parse(text) > 31)
         {
+            Debug.Log("!");
             tmp.text = "";
             button.interactable = false;
         }
