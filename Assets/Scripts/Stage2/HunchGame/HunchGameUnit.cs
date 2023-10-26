@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class HunchGameUnit : StudentUnit
+public class HunchGameUnit : MonoBehaviour
 {
     TextMeshProUGUI text;
     void Awake()
