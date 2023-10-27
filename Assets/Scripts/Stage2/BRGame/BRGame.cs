@@ -16,7 +16,7 @@ public class BRGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetIndex(4);
+        SetIndex(0);
 
         buttonController.SetBRGameManager(this);
         StartCoroutine(Game());
@@ -62,7 +62,7 @@ public class BRGame : MonoBehaviour
                     Debug.Log(currentNum);
                     units[index % 6].SayNumber(currentNum++);
 
-                    if (currentNum == 31) break;
+                    if (currentNum >= 31) break;
 
                     yield return new WaitForSeconds(interval);
                 }
