@@ -28,6 +28,7 @@ public static class DialogueUtils
         if (DialogueController.instance == null)
         {
             Debug.LogError("DialogueUtils: DialogueController is null");
+            return;
         }
 
         if (currentDialogues.Count == 0)

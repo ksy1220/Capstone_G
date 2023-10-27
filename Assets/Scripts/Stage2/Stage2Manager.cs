@@ -14,7 +14,7 @@ public class Stage2Manager : StageManager
 
     void Start()
     {
-        StartStage2();
+        // StartStage2();
     }
 
     void StartStage2()

@@ -8,7 +8,7 @@ public class HunchGameUnit : MonoBehaviour
     TextMeshProUGUI text;
     void Awake()
     {
-        text = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        text = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
         text.text = "";
     }
 
