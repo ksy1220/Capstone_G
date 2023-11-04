@@ -15,7 +15,7 @@ public class TextBalloon : MonoBehaviour
 
     void Awake()
     {
-        canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup = gameObject.AddComponent<CanvasGroup>();
         tmp = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
         colorPerFrame = 1 / fadeTime;

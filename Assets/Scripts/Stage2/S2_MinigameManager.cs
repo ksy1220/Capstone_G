@@ -4,43 +4,52 @@ using UnityEngine;
 
 public class S2_MinigameManager : MonoBehaviour
 {
-    int alcoholGauge = 5;
-    public int AlcoholGauge
-    {
-        get { return alcoholGauge; }
-        set
-        {
-            if (value <= 0)
-                GameOver();
-            else
-                alcoholGauge = value;
-        }
-    }
+    int alcoholGauge = 0;
+    int maxGameNum = 5;
+    int maxAlcoholGauge = 3;
 
     [SerializeField]
-    GameObject[] MinigamePrefabs;
+    S2_Minigame[] MinigamePrefabs;
+
+    public StudentUnit[] units;
+    public StudentUnit playerUnit;
 
     GameObject currentGame;
 
+    int index = 0;
+
     void Start()
     {
-        foreach (GameObject minigame in MinigamePrefabs)
+        playerUnit = units[1];
+
+        foreach (S2_Minigame minigame in MinigamePrefabs)
         {
-            minigame.GetComponent<S2_Minigame>().SetManager(this);
+            minigame.SetManager(this);
         }
+
+        StartNextGame();
     }
 
-    GameObject GetRandomGame()
+    public void OnGameEnd(bool isWin)
     {
-        return MinigamePrefabs[0];
+        if (!isWin && ++alcoholGauge >= maxAlcoholGauge)
+        {
+            GameOver();
+            return;
+        }
+
+        Debug.Log("Start randomGame dialogue");
+        DialogueController.instance.StartDialogue("randomGame");
     }
 
     public void StartNextGame()
     {
         Debug.Log("Start next game");
+        MinigamePrefabs[index++].SetGame(0);
     }
+
     void GameOver()
     {
-
+        Debug.Log("Game Over");
     }
 }
