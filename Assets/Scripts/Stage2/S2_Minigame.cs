@@ -29,9 +29,9 @@ public class S2_Minigame : MonoBehaviour
         toggle.isOn = true;
     }
 
-    public void EndGame(bool isWin)
+    public void EndGame(bool isWin, StudentUnit loserUnit)
     {
         Debug.Log($"End game: win? {isWin}");
-        minigameManager.OnGameEnd(isWin);
+        minigameManager.OnGameEnd(isWin, loserUnit.studentName);
     }
 }

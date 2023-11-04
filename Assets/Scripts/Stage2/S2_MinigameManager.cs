@@ -30,7 +30,7 @@ public class S2_MinigameManager : MonoBehaviour
         StartNextGame();
     }
 
-    public void OnGameEnd(bool isWin)
+    public void OnGameEnd(bool isWin, string loserName)
     {
         if (!isWin && ++alcoholGauge >= maxAlcoholGauge)
         {
@@ -38,8 +38,8 @@ public class S2_MinigameManager : MonoBehaviour
             return;
         }
 
-        Debug.Log("Start randomGame dialogue");
         DialogueController.instance.StartDialogue("randomGame");
+        DialogueUtils.ReplaceName(loserName);
     }
 
     public void StartNextGame()

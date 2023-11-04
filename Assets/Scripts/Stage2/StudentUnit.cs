@@ -5,6 +5,7 @@ using UnityEngine;
 public class StudentUnit : MonoBehaviour
 {
     TextBalloon textBalloon;
+    public string studentName;
 
     void Awake()
     {

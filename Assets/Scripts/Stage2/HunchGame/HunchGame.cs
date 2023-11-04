@@ -33,7 +33,9 @@ public class HunchGame : S2_Minigame
     */
     IEnumerator Game()
     {
-        while (currNum < maxNum)
+        StudentUnit curUnit = null;
+
+        while (currNum <= maxNum)
         {
             // if (Random.Range(0.0f, 1.0f) <= prob_unitsTroll && units.Count >= 2)
             // {
@@ -43,12 +45,13 @@ public class HunchGame : S2_Minigame
 
             float interval = Random.Range(0.5f, currNum);
             yield return new WaitForSeconds(interval);
-            GetRandomUnit().SayNumber(currNum++);
+            curUnit = GetRandomUnit();
+            curUnit.SayNumber(currNum++);
 
             yield return null;
         }
 
-        base.EndGame(userNum != 0 && userNum != maxNum);
+        base.EndGame(userNum != 0 && userNum != maxNum, curUnit);
     }
 
     void SaySameNumber()
@@ -88,7 +91,7 @@ public class HunchGame : S2_Minigame
             // 유저 패
             StopCoroutine(gameCoroutine);
             Debug.Log("유저 패");
-            base.EndGame(false);
+            base.EndGame(false, GetManager().playerUnit);
         }
     }
 }

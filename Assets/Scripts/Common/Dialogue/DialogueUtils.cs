@@ -57,4 +57,18 @@ public static class DialogueUtils
         }
 
     }
+
+    static string beforeName = "{이름}";
+    public static void ReplaceName(string name)
+    {
+        Debug.Log("Replace name");
+        for (int i = 0; i < currentDialogues.Count; i++)
+        {
+            if (currentDialogues[i].text.Contains(beforeName))
+            {
+                currentDialogues[i].text = currentDialogues[i].text.Replace(beforeName, name);
+            }
+        }
+        beforeName = name;
+    }
 }

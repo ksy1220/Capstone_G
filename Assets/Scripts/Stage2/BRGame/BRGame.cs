@@ -40,7 +40,7 @@ public class BRGame : S2_Minigame
     {
         if (called31)
         {
-            EndGame(false);
+            EndGame(false, GetManager().playerUnit);
         }
         else
         {
@@ -78,6 +78,8 @@ public class BRGame : S2_Minigame
         }
 
         Debug.Log("BR Done");
-        EndGame(true);
+        Debug.Log($"loser: {index}");
+
+        EndGame(true, units[(index - 1) % 6]);
     }
 }
