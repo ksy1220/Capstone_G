@@ -35,7 +35,7 @@ public class HunchGame : S2_Minigame
     {
         StudentUnit curUnit = null;
 
-        while (currNum <= maxNum)
+        while (currNum < maxNum)
         {
             // if (Random.Range(0.0f, 1.0f) <= prob_unitsTroll && units.Count >= 2)
             // {
@@ -51,7 +51,10 @@ public class HunchGame : S2_Minigame
             yield return null;
         }
 
-        base.EndGame(userNum != 0 && userNum != maxNum, curUnit);
+        if (userNum == 0)
+            base.EndGame(false, GetManager().playerUnit);
+        else
+            base.EndGame(true, units[0]);
     }
 
     void SaySameNumber()

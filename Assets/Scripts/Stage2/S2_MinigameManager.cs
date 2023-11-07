@@ -15,6 +15,7 @@ public class S2_MinigameManager : MonoBehaviour
     public StudentUnit playerUnit;
 
     GameObject currentGame;
+    StudentUnit loserUnit;
 
     int index = 0;
 
@@ -30,7 +31,7 @@ public class S2_MinigameManager : MonoBehaviour
         StartNextGame();
     }
 
-    public void OnGameEnd(bool isWin, string loserName)
+    public void OnGameEnd(bool isWin, StudentUnit loserUnit)
     {
         if (!isWin && ++alcoholGauge >= maxAlcoholGauge)
         {
@@ -38,14 +39,18 @@ public class S2_MinigameManager : MonoBehaviour
             return;
         }
 
+        this.loserUnit = loserUnit;
+
         DialogueController.instance.StartDialogue("randomGame");
-        DialogueUtils.ReplaceName(loserName);
+        DialogueUtils.ReplaceName(loserUnit.studentName);
     }
 
     public void StartNextGame()
     {
         Debug.Log("Start next game");
-        MinigamePrefabs[index++].SetGame(0);
+        int startIndex = loserUnit == null ? 0 : loserUnit.transform.GetSiblingIndex();
+        Debug.Log($"loser unit index : {startIndex}");
+        MinigamePrefabs[index++].SetGame(startIndex);
     }
 
     void GameOver()

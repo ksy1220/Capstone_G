@@ -32,6 +32,6 @@ public class S2_Minigame : MonoBehaviour
     public void EndGame(bool isWin, StudentUnit loserUnit)
     {
         Debug.Log($"End game: win? {isWin}");
-        minigameManager.OnGameEnd(isWin, loserUnit.studentName);
+        minigameManager.OnGameEnd(isWin, loserUnit);
     }
 }
