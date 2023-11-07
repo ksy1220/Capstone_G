@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Stage4Manager : StageManager
 {
     [SerializeField]
-    GameObject RoomBG, WaitingBG, InterviewBG1, InterviewBG2, InterviewBG3;
+    GameObject RoomBG, WaitingBG, InterviewBG1, InterviewBG2, InterviewBG3, library;
     [SerializeField]
     GameObject BackgroundCanvas, HanoiGameCanvas, EmotionGameCanvas, WeatherGameCanvas;
 
@@ -70,4 +70,5 @@ public class Stage4Manager : StageManager
         BGObject.SetActive(true);
         currentBG = BGObject;
     }
+   
 }
