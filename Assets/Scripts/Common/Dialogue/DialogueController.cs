@@ -187,11 +187,17 @@ public class DialogueController : MonoBehaviour
         DialogueUtils.MoveNext();
     }
 
+    public void SkipDialogue()
+    {
+        DialogueUtils.SkipDialogue();
+    }
+
     // 대화 종료 후 모든 대화창 끄기
     public void EndDialogue()
     {
         dialougeToggleGroup.SetAllTogglesOff();
         TouchPanel.SetActive(false);
+        gameObject.SetActive(false);
     }
 
 }
