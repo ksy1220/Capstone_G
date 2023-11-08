@@ -16,7 +16,6 @@ public class HunchGame : S2_Minigame
     public override void SetGame(int startIndex)
     {
         base.SetGame(startIndex);
-        StudentUnit startUnit = GetManager().units[startIndex];
 
         foreach (StudentUnit unit in GetManager().units)
         {
@@ -24,15 +23,23 @@ public class HunchGame : S2_Minigame
         }
         units.Remove(GetManager().playerUnit);
 
+        transform.GetChild(1).gameObject.SetActive(true);
+    }
+
+    public void OnClickStart()
+    {
+        StudentUnit startUnit = GetManager().units[startIndex];
+
         if (startUnit != GetManager().playerUnit)
         {
             startUnit.SayNumber(1);
             units.Remove(startUnit);
+            currNum++;
         }
-        currNum++;
 
         gameCoroutine = StartCoroutine(Game());
     }
+
     IEnumerator Game()
     {
         StudentUnit curUnit = null;

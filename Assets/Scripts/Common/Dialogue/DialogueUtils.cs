@@ -46,16 +46,17 @@ public static class DialogueUtils
 
     public static Dialogue GetNextDialogue()
     {
+        Debug.Log($"{index}: {currentDialogues[index].text}");
+
         return currentDialogues[index++];
     }
 
     public static void SkipDialogue()
     {
-        while (currentDialogues.Count > 0 && !currentDialogues[index].type.Contains("선택지"))
+        while (index < currentDialogues.Count && !currentDialogues[index].type.Contains("선택지"))
         {
             MoveNext();
         }
-
     }
 
     static string beforeName = "{이름}";

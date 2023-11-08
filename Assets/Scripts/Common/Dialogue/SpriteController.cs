@@ -5,23 +5,21 @@ using UnityEngine;
 public class SpriteController : MonoBehaviour
 {
     [SerializeField]
-    Sprite[] penguinSprites;
+    Sprite[] characterSprites;
 
     public static SpriteController GetSpriteController()
     {
         return Resources.Load<SpriteController>("SpriteController");
     }
 
-    public Sprite GetSprite(string charName, string spriteName)
+    public Sprite GetSprite(string charName)
     {
-        if (charName == "펭순이")
-        {
-            switch (spriteName)
-            {
-                default:
-                    return penguinSprites[0];
-            }
-        }
+        if (charName == "주인공")
+            return characterSprites[0];
+
+        else if (charName == "대학친구1")
+            return characterSprites[1];
+
         return null;
     }
 }

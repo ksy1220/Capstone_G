@@ -6,23 +6,25 @@ using UnityEngine.UI;
 public class Stage2Manager : StageManager
 {
     [SerializeField]
-    GameObject HomeBG, SchoolBG;
+    Sprite CoinSongBG, RoomBG, SchoolBG, PCRoomBG, ClassRoomBG, RoadBG;
     [SerializeField]
     GameObject BackgroundCanvas, MiniGameCanvas;
     S2_MinigameManager minigameManager;
 
     GameObject currentBG;
+    Image BGImg;
 
     void Start()
     {
-        StartStage2();
         minigameManager = MiniGameCanvas.GetComponent<S2_MinigameManager>();
+        BGImg = BackgroundCanvas.transform.GetChild(0).GetComponent<Image>();
+        StartStage2();
     }
 
     void StartStage2()
     {
         dialogueController.StartDialogue("intro");
-        ChangeBG(HomeBG);
+        ChangeBG(CoinSongBG);
     }
 
     public override void DoAction(string action)
@@ -30,8 +32,26 @@ public class Stage2Manager : StageManager
         Debug.Log($"Action: {action}");
         switch (action)
         {
+            case "ToCoinSong":
+                ChangeBG(CoinSongBG);
+                break;
+            case "ToPCRoom":
+                ChangeBG(PCRoomBG);
+                break;
+            case "ToRoom":
+                ChangeBG(RoomBG);
+                break;
             case "ToSchool":
                 ChangeBG(SchoolBG);
+                break;
+            case "ToClassRoom":
+                ChangeBG(ClassRoomBG);
+                break;
+            case "ToRoad":
+                ChangeBG(RoadBG);
+                break;
+            case "OffBG":
+                BackgroundCanvas.SetActive(false);
                 break;
             case "StartMiniGame":
                 BackgroundCanvas.SetActive(false);
@@ -39,12 +59,6 @@ public class Stage2Manager : StageManager
                 break;
             case "StartNextGame":
                 minigameManager.StartNextGame();
-                break;
-            case "PrintYes":
-                Debug.Log("Yes");
-                break;
-            case "PrintNo":
-                Debug.Log("No");
                 break;
             default:
                 Debug.Log("default action");
@@ -57,14 +71,11 @@ public class Stage2Manager : StageManager
         dialogueController.StartDialogue("afterMiniGame");
     }
 
-    void ChangeBG(GameObject BGObject)
+    void ChangeBG(Sprite sprite)
     {
         if (!BackgroundCanvas.activeSelf)
             BackgroundCanvas.SetActive(true);
 
-        if (currentBG != null)
-            currentBG.SetActive(false);
-        BGObject.SetActive(true);
-        currentBG = BGObject;
+        BGImg.sprite = sprite;
     }
 }

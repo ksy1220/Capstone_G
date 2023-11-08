@@ -29,6 +29,12 @@ public class FruitGame : S2_Minigame
         units = GetManager().units;
         buttonController.SetFruitGameManager(this);
         playerIndex = GetManager().playerIndex;
+
+        transform.GetChild(1).gameObject.SetActive(true);
+    }
+
+    public void OnClickStart()
+    {
         StartCoroutine(Game());
     }
 
@@ -64,13 +70,13 @@ public class FruitGame : S2_Minigame
     {
         List<string> answerList = new List<string>();
 
-        int maxIndex = currIndex <= 4 ? 4 : 8;
-
         int orderIndex = 0;
+
+        int maxIndex = currIndex <= 4 ? 4 : 8;
 
         for (int j = 0; j < maxIndex; j++)
         {
-            if (j < maxIndex - currIndex)
+            if (j < 4 - currIndex || j >= 4 && j < 12 - currIndex)
                 answerList.Add("짝");
             else
                 answerList.Add(orderList[(orderIndex++) % 5]);
