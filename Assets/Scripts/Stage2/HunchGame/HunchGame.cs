@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class HunchGame : S2_Minigame
 {
-    [SerializeField]
-    List<HunchGameUnit> units;
-    [SerializeField]
-    HunchGameUnit userUnit;
+    List<StudentUnit> units = new List<StudentUnit>();
     int currNum = 1;
     int maxNum = 6;
     // 유닛끼리 같은 숫자 외칠 확률 (임시)
@@ -20,6 +17,12 @@ public class HunchGame : S2_Minigame
 
     void Start()
     {
+        foreach (StudentUnit unit in GetManager().units)
+        {
+            units.Add(unit);
+        }
+        units.Remove(GetManager().playerUnit);
+
         gameCoroutine = StartCoroutine(Game());
     }
 
@@ -30,22 +33,28 @@ public class HunchGame : S2_Minigame
     */
     IEnumerator Game()
     {
+        StudentUnit curUnit = null;
+
         while (currNum < maxNum)
         {
-            if (Random.Range(0.0f, 1.0f) <= prob_unitsTroll && units.Count >= 2)
-            {
-                SaySameNumber();
-                break;
-            }
+            // if (Random.Range(0.0f, 1.0f) <= prob_unitsTroll && units.Count >= 2)
+            // {
+            //     SaySameNumber();
+            //     break;
+            // }
 
             float interval = Random.Range(0.5f, currNum);
             yield return new WaitForSeconds(interval);
-            GetRandomUnit().SayNumber(currNum++);
+            curUnit = GetRandomUnit();
+            curUnit.SayNumber(currNum++);
 
             yield return null;
         }
 
-        base.EndGame(userNum != 0 && userNum != maxNum);
+        if (userNum == 0)
+            base.EndGame(false, GetManager().playerUnit);
+        else
+            base.EndGame(true, units[0]);
     }
 
     void SaySameNumber()
@@ -56,10 +65,10 @@ public class HunchGame : S2_Minigame
         Debug.Log("Said same number");
     }
 
-    HunchGameUnit GetRandomUnit()
+    StudentUnit GetRandomUnit()
     {
         int ranIndex = Random.Range(0, units.Count);
-        HunchGameUnit unit = units[ranIndex];
+        StudentUnit unit = units[ranIndex];
 
         units.RemoveAt(ranIndex);
 
@@ -71,7 +80,7 @@ public class HunchGame : S2_Minigame
     {
         if (userNum > 0 || isGameDone) return;
 
-        userUnit.SayNumber(num);
+        GetManager().playerUnit.SayNumber(num);
         userNum = num;
 
         if (num == currNum)
@@ -85,7 +94,7 @@ public class HunchGame : S2_Minigame
             // 유저 패
             StopCoroutine(gameCoroutine);
             Debug.Log("유저 패");
-            base.EndGame(false);
+            base.EndGame(false, GetManager().playerUnit);
         }
     }
 }

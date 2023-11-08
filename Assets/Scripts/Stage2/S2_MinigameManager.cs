@@ -4,43 +4,59 @@ using UnityEngine;
 
 public class S2_MinigameManager : MonoBehaviour
 {
-    int alcoholGauge = 5;
-    public int AlcoholGauge
-    {
-        get { return alcoholGauge; }
-        set
-        {
-            if (value <= 0)
-                GameOver();
-            else
-                alcoholGauge = value;
-        }
-    }
+    int alcoholGauge = 0;
+    int maxGameNum = 5;
+    int maxAlcoholGauge = 3;
 
     [SerializeField]
-    GameObject[] MinigamePrefabs;
+    S2_Minigame[] MinigamePrefabs;
+
+    public StudentUnit[] units;
+    public StudentUnit playerUnit;
+    public int playerIndex;
 
     GameObject currentGame;
+    StudentUnit loserUnit;
+
+    int index = 0;
 
     void Start()
     {
-        foreach (GameObject minigame in MinigamePrefabs)
+        playerIndex = playerUnit.transform.GetSiblingIndex();
+
+        foreach (S2_Minigame minigame in MinigamePrefabs)
         {
-            minigame.GetComponent<S2_Minigame>().SetManager(this);
+            minigame.SetManager(this);
         }
+
+        StartNextGame();
     }
 
-    GameObject GetRandomGame()
+    public void OnGameEnd(bool isWin, StudentUnit loserUnit)
     {
-        return MinigamePrefabs[0];
+        if (!isWin && ++alcoholGauge >= maxAlcoholGauge)
+        {
+            GameOver();
+            return;
+        }
+
+        this.loserUnit = loserUnit;
+
+        DialogueController.instance.StartDialogue("randomGame");
+        DialogueUtils.ReplaceName(loserUnit.studentName);
     }
 
     public void StartNextGame()
     {
         Debug.Log("Start next game");
+        int startIndex = loserUnit == null ? 0 : loserUnit.transform.GetSiblingIndex();
+        Debug.Log($"loser unit index : {startIndex}");
+        Debug.Log(MinigamePrefabs[index].gameObject.name);
+        MinigamePrefabs[index++].SetGame(startIndex);
     }
+
     void GameOver()
     {
-
+        Debug.Log("Game Over");
     }
 }

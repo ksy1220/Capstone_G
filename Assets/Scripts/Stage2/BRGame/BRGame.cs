@@ -2,29 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BRGame : MonoBehaviour
+public class BRGame : S2_Minigame
 {
-    [SerializeField]
-    BRGameUnit[] units;
+    StudentUnit[] units;
     [SerializeField]
     BRGameButtonController buttonController;
     int index = 0;
 
     int currentNum = 1;
     float interval = 0.5f;
+    int playerIndex;
 
-    // Start is called before the first frame update
-    void Start()
+    public override void SetGame(int startIndex)
     {
-        SetIndex(0);
+        base.SetGame(startIndex);
+        this.index = startIndex;
 
+        units = GetManager().units;
+        playerIndex = GetManager().playerIndex;
         buttonController.SetBRGameManager(this);
         StartCoroutine(Game());
-    }
-
-    public void SetIndex(int index)
-    {
-        this.index = index;
     }
 
     int GetRandomNum()
@@ -37,10 +34,17 @@ public class BRGame : MonoBehaviour
         currentNum++;
     }
 
-    public void AfterUserInput()
+    public void AfterUserInput(bool called31)
     {
-        // 게임 재개
-        StartCoroutine(Game());
+        if (called31)
+        {
+            EndGame(false, GetManager().playerUnit);
+        }
+        else
+        {
+            // 게임 재개
+            StartCoroutine(Game());
+        }
     }
 
     IEnumerator Game()
@@ -48,7 +52,7 @@ public class BRGame : MonoBehaviour
         while (currentNum <= 31)
         {
             // 플레이어
-            if (index % 6 == 5)
+            if (index % 6 == playerIndex)
             {
                 Debug.Log($"currentNum: {currentNum}");
                 buttonController.SetButtons(currentNum);
@@ -72,5 +76,8 @@ public class BRGame : MonoBehaviour
         }
 
         Debug.Log("BR Done");
+        Debug.Log($"loser: {index}");
+
+        EndGame(true, units[(index - 1) % 6]);
     }
 }
