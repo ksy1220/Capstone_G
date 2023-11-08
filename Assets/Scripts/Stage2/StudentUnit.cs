@@ -21,4 +21,9 @@ public class StudentUnit : MonoBehaviour
     {
         textBalloon.SetText(text);
     }
+
+    public void SayImage(Sprite sprite)
+    {
+        textBalloon.SetImage(sprite);
+    }
 }

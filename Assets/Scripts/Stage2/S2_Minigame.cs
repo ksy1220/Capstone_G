@@ -27,6 +27,8 @@ public class S2_Minigame : MonoBehaviour
             toggle = GetComponent<Toggle>();
 
         toggle.isOn = true;
+
+        gameObject.SetActive(true);
     }
 
     public void EndGame(bool isWin, StudentUnit loserUnit)

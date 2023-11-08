@@ -11,19 +11,17 @@ public class BRGame : S2_Minigame
 
     int currentNum = 1;
     float interval = 0.5f;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        units = GetManager().units;
-        buttonController.SetBRGameManager(this);
-        StartCoroutine(Game());
-    }
+    int playerIndex;
 
     public override void SetGame(int startIndex)
     {
         base.SetGame(startIndex);
         this.index = startIndex;
+
+        units = GetManager().units;
+        playerIndex = GetManager().playerIndex;
+        buttonController.SetBRGameManager(this);
+        StartCoroutine(Game());
     }
 
     int GetRandomNum()
@@ -54,7 +52,7 @@ public class BRGame : S2_Minigame
         while (currentNum <= 31)
         {
             // 플레이어
-            if (index % 6 == 1)
+            if (index % 6 == playerIndex)
             {
                 Debug.Log($"currentNum: {currentNum}");
                 buttonController.SetButtons(currentNum);

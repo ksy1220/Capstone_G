@@ -16,13 +16,19 @@ public class FruitGame : S2_Minigame
     FruitGameButtonController buttonController;
     bool isIncreasing = true;
 
+    int playerIndex;
+
 
     List<string> orderList = new List<string> { "딸기", "당근", "수박", "참외", "메론" };
 
-    void Start()
+    public override void SetGame(int startIndex)
     {
+        base.SetGame(startIndex);
+        this.unitIndex = startIndex;
+
         units = GetManager().units;
         buttonController.SetFruitGameManager(this);
+        playerIndex = GetManager().playerIndex;
         StartCoroutine(Game());
     }
 
@@ -84,7 +90,7 @@ public class FruitGame : S2_Minigame
     {
         while (roundIndex <= maxRound)
         {
-            if (unitIndex % 6 == 1)
+            if (unitIndex % 6 == playerIndex)
             {
                 buttonController.transform.parent.gameObject.SetActive(true);
                 yield break;

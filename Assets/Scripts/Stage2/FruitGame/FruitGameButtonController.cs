@@ -7,10 +7,6 @@ public class FruitGameButtonController : MonoBehaviour
     FruitGame fruitGameManager;
     StudentUnit playerUnit;
     List<string> userInput = new List<string>();
-    void Awake()
-    {
-        transform.parent.gameObject.SetActive(false);
-    }
 
     public void SetFruitGameManager(FruitGame fruitGameManager)
     {
@@ -28,5 +24,7 @@ public class FruitGameButtonController : MonoBehaviour
     {
         fruitGameManager.CheckUserInput(userInput);
         userInput = new List<string>();
+
+        transform.parent.gameObject.SetActive(false);
     }
 }

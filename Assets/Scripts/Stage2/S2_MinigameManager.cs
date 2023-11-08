@@ -13,6 +13,7 @@ public class S2_MinigameManager : MonoBehaviour
 
     public StudentUnit[] units;
     public StudentUnit playerUnit;
+    public int playerIndex;
 
     GameObject currentGame;
     StudentUnit loserUnit;
@@ -21,7 +22,7 @@ public class S2_MinigameManager : MonoBehaviour
 
     void Start()
     {
-        playerUnit = units[1];
+        playerIndex = playerUnit.transform.GetSiblingIndex();
 
         foreach (S2_Minigame minigame in MinigamePrefabs)
         {
@@ -50,6 +51,7 @@ public class S2_MinigameManager : MonoBehaviour
         Debug.Log("Start next game");
         int startIndex = loserUnit == null ? 0 : loserUnit.transform.GetSiblingIndex();
         Debug.Log($"loser unit index : {startIndex}");
+        Debug.Log(MinigamePrefabs[index].gameObject.name);
         MinigamePrefabs[index++].SetGame(startIndex);
     }
 
