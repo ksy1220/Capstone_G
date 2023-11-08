@@ -1,0 +1,30 @@
+category,type,name,text,sprite,action,nextCategory,mental
+1,대사,나,내일이 면접인데 준비를 하나도 못했네 ㅠㅠ,,,,
+1,대사,나,앗! 이럴 땐 미리 AI 면접 게임을 체험해볼 수 있는,,,,
+1,대사,나,college quest가 있잖아?,,,,
+1,대사,나,어떤 게임부터 시작해볼까?,,,,
+1,선택지3,,하노이탑,,,2,
+1,선택지3,,감정 맞추기,,,3,
+1,선택지3,,날씨 맞추기,,,4,
+,,,,,,,
+2,대사,,하노이탑 게임을 시작합니다.,,,,
+2,액션,,,,hanoi,,
+,,,,,,,
+3,대사,,이 게임은 감정 맞추기,,,,
+3,액션,,,,emotion,,
+,,,,,,,
+4,대사,,이 게임은 날씨 맞추기,,,,
+
+interview_waiting,대사,나,막상 면접장에 도착하니까 떨린다 ..,,,,
+interview_waiting,대사,나,대기번호 10번이니까 ,,,,
+interview_waiting,대사,나,예상 질문지를 꺼내볼까?,,,,
+interview_waiting,대사,나,헉 분명히 챙겼는데 어디로 갔지?,,,,
+interview_waiting,알림,,멘탈지수가 30 하락했습니다.,,,,-30
+interview_waiting,대사,나,벌써 내 차례잖아?,,,interview,
+interview,액션,,,,ToInterview,,
+interview,대사,,(면접장 입장),,,,
+interview,대사,면접관1,안녕하세요. 자리에 앉아주시기 바랍니다.,,,,
+interview,선택지2,,자리를 박차고 나간다.,,,A,
+interview,선택지2,,인사와 함께 자리에 앉는다.,,,B,
+
+
