@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class S2_MinigameManager : MonoBehaviour
 {
     int alcoholGauge = 0;
-    int maxGameNum = 5;
+    int maxGameNum = 4;
     int maxAlcoholGauge = 3;
 
     [SerializeField]
@@ -20,24 +21,50 @@ public class S2_MinigameManager : MonoBehaviour
 
     int index = 0;
 
+    [SerializeField]
+    Slider alcoholSlider;
+
+    [SerializeField]
+    Sprite clearImg, failImg;
+    [SerializeField]
+    GameObject ResultPanel;
+
     void Start()
     {
         playerIndex = playerUnit.transform.GetSiblingIndex();
 
+        ShuffleGame();
+
         foreach (S2_Minigame minigame in MinigamePrefabs)
         {
             minigame.SetManager(this);
+            Debug.Log(minigame.gameObject.name);
         }
 
         StartNextGame();
     }
 
+    void ShuffleGame()
+    {
+        int ran1, ran2;
+        int arrLength = MinigamePrefabs.Length;
+        for (int i = 0; i < arrLength; i++)
+        {
+            ran1 = Random.Range(0, arrLength);
+            ran2 = Random.Range(0, arrLength);
+
+            S2_Minigame temp = MinigamePrefabs[ran1];
+            MinigamePrefabs[ran1] = MinigamePrefabs[ran2];
+            MinigamePrefabs[ran2] = temp;
+        }
+    }
+
     public void OnGameEnd(bool isWin, StudentUnit loserUnit)
     {
-        if (!isWin && ++alcoholGauge >= maxAlcoholGauge)
+        if (!isWin)
         {
-            GameOver();
-            return;
+            alcoholSlider.value = ++alcoholGauge / (float)maxAlcoholGauge;
+
         }
 
         this.loserUnit = loserUnit;
@@ -48,15 +75,30 @@ public class S2_MinigameManager : MonoBehaviour
 
     public void StartNextGame()
     {
+        if (alcoholGauge >= maxAlcoholGauge)
+        {
+            EndMiniGame(false);
+            return;
+        }
+
+        if (index == MinigamePrefabs.Length)
+        {
+            EndMiniGame(true);
+            return;
+        }
         Debug.Log("Start next game");
         int startIndex = loserUnit == null ? 0 : loserUnit.transform.GetSiblingIndex();
         Debug.Log($"loser unit index : {startIndex}");
-        Debug.Log(MinigamePrefabs[index].gameObject.name);
+
         MinigamePrefabs[index++].SetGame(startIndex);
     }
 
-    void GameOver()
+    void EndMiniGame(bool isWin)
     {
-        Debug.Log("Game Over");
+        GetComponent<ToggleGroup>().SetAllTogglesOff();
+        ResultPanel.SetActive(true);
+        ResultPanel.transform.GetChild(0).GetComponent<Image>().sprite = isWin ? clearImg : failImg;
+        Debug.Log("EndMiniGame " + isWin.ToString());
     }
+
 }
