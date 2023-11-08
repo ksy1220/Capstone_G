@@ -47,6 +47,7 @@ public static class DialogueUtils
     public static Dialogue GetNextDialogue()
     {
         Debug.Log($"{index}: {currentDialogues[index].text}");
+
         return currentDialogues[index++];
     }
 

@@ -37,6 +37,8 @@ public class DialogueController : MonoBehaviour
 
     SpriteController spriteController;
 
+    string userName = "종익";
+
     void Awake()
     {
         instance = this;
@@ -53,6 +55,8 @@ public class DialogueController : MonoBehaviour
         ToggleInteractionOff();
 
         spriteController = SpriteController.GetSpriteController();
+
+        // userName = DataController.instance.GetGameData().userName;
     }
 
     // 토글 터치 후 꺼짐 방지
@@ -87,10 +91,10 @@ public class DialogueController : MonoBehaviour
             case "대사":
                 characterLineToggle.isOn = true;
 
-                lineText.text = dialogue.text;
-                nameText.text = dialogue.name;
-
                 Sprite sprite = spriteController.GetSprite(dialogue.name);
+
+                lineText.text = dialogue.text.Replace("주인공", userName);
+                nameText.text = dialogue.name.Replace("주인공", userName);
 
                 if (sprite == null)
                     characterImage.gameObject.SetActive(false);
@@ -104,7 +108,7 @@ public class DialogueController : MonoBehaviour
 
             case "알림":
                 noticeToggle.isOn = true;
-                noticeText.text = dialogue.text;
+                noticeText.text = dialogue.text.Replace("주인공", userName);
                 SetTouchPanelOn();
                 break;
 

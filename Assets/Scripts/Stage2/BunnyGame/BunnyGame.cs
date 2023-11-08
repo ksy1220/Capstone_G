@@ -51,6 +51,11 @@ public class BunnyGame : S2_Minigame
         playerIndex = GetManager().playerIndex;
         maxBunnyIndex = bunnyUnits.Count;
 
+        transform.GetChild(2).gameObject.SetActive(true);
+    }
+
+    public void OnClickStart()
+    {
         bunnyUnits[startIndex].DoMotion(BunnyMotion.bunny);
     }
 
