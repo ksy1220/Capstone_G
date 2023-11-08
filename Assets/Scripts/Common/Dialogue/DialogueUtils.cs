@@ -4,9 +4,10 @@ using UnityEngine;
 
 public static class DialogueUtils
 {
-    static Queue<Dialogue> currentDialogues;
+    static List<Dialogue> currentDialogues;
+    static int index = 0;
 
-    public static void SetCurrentDialogues(Queue<Dialogue> dialogues)
+    public static void SetCurrentDialogues(List<Dialogue> dialogues)
     {
         if (dialogues == null)
         {
@@ -14,6 +15,7 @@ public static class DialogueUtils
             return;
         }
 
+        index = 0;
         currentDialogues = dialogues;
     }
 
@@ -28,6 +30,7 @@ public static class DialogueUtils
         if (DialogueController.instance == null)
         {
             Debug.LogError("DialogueUtils: DialogueController is null");
+            return;
         }
 
         if (currentDialogues.Count == 0)
@@ -43,15 +46,29 @@ public static class DialogueUtils
 
     public static Dialogue GetNextDialogue()
     {
-        return currentDialogues.Dequeue();
+        return currentDialogues[index++];
     }
 
     public static void SkipDialogue()
     {
-        while (currentDialogues.Count > 0 && !currentDialogues.Peek().type.Contains("선택지"))
+        while (currentDialogues.Count > 0 && !currentDialogues[index].type.Contains("선택지"))
         {
             MoveNext();
         }
 
+    }
+
+    static string beforeName = "{이름}";
+    public static void ReplaceName(string name)
+    {
+        Debug.Log("Replace name");
+        for (int i = 0; i < currentDialogues.Count; i++)
+        {
+            if (currentDialogues[i].text.Contains(beforeName))
+            {
+                currentDialogues[i].text = currentDialogues[i].text.Replace(beforeName, name);
+            }
+        }
+        beforeName = name;
     }
 }

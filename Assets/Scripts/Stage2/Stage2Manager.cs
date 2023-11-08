@@ -9,12 +9,14 @@ public class Stage2Manager : StageManager
     GameObject HomeBG, SchoolBG;
     [SerializeField]
     GameObject BackgroundCanvas, MiniGameCanvas;
+    S2_MinigameManager minigameManager;
 
     GameObject currentBG;
 
     void Start()
     {
-        StartStage2();
+        // StartStage2();
+        minigameManager = MiniGameCanvas.GetComponent<S2_MinigameManager>();
     }
 
     void StartStage2()
@@ -34,6 +36,9 @@ public class Stage2Manager : StageManager
             case "StartMiniGame":
                 BackgroundCanvas.SetActive(false);
                 MiniGameCanvas.SetActive(true);
+                break;
+            case "StartNextGame":
+                minigameManager.StartNextGame();
                 break;
             case "PrintYes":
                 Debug.Log("Yes");
