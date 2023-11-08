@@ -87,7 +87,7 @@ public class S2_MinigameManager : MonoBehaviour
             return;
         }
         Debug.Log("Start next game");
-        int startIndex = loserUnit == null ? 0 : loserUnit.transform.GetSiblingIndex();
+        int startIndex = loserUnit == null ? playerIndex : loserUnit.transform.GetSiblingIndex();
         Debug.Log($"loser unit index : {startIndex}");
 
         MinigamePrefabs[index++].SetGame(startIndex);
