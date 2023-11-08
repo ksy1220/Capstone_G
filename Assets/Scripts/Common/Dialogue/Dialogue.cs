@@ -10,9 +10,6 @@ public class Dialogue
     // 대사
     public string text;
 
-    // 이미지 이름
-    public string sprite;
-
     // 액션
     public string action;
 

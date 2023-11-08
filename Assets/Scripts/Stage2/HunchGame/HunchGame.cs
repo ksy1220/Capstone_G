@@ -28,8 +28,8 @@ public class HunchGame : S2_Minigame
         {
             startUnit.SayNumber(1);
             units.Remove(startUnit);
+            currNum++;
         }
-        currNum++;
 
         gameCoroutine = StartCoroutine(Game());
     }

@@ -27,7 +27,6 @@ public static class CSVConverter
             tempDialogue.type = texts[i]["type"].ToString();
             tempDialogue.name = RefineText(texts[i]["name"].ToString());
             tempDialogue.text = RefineText(texts[i]["text"].ToString());
-            tempDialogue.sprite = texts[i]["sprite"].ToString();
             tempDialogue.action = texts[i]["action"].ToString();
             tempDialogue.nextCategory = texts[i]["nextCategory"].ToString();
             tempDialogue.mentalIndex = texts[i]["mental"].ToString() == "" ? 0 : int.Parse(texts[i]["mental"].ToString());

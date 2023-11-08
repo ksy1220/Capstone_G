@@ -90,7 +90,7 @@ public class DialogueController : MonoBehaviour
                 lineText.text = dialogue.text;
                 nameText.text = dialogue.name;
 
-                Sprite sprite = spriteController.GetSprite(dialogue.name, dialogue.sprite);
+                Sprite sprite = spriteController.GetSprite(dialogue.name);
 
                 if (sprite == null)
                     characterImage.gameObject.SetActive(false);

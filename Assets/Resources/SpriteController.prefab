@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32666887ef9b5f45879f73708cd1a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  penguinSprites:
-  - {fileID: 21300000, guid: 901639f1dddd7b04aa3c943786d274d5, type: 3}
+  characterSprites:
+  - {fileID: 21300000, guid: 4d9492faddec3c749b453acd9dd6f544, type: 3}
+  - {fileID: 21300000, guid: e7fa95a27739e2c41be9539754ae9769, type: 3}
