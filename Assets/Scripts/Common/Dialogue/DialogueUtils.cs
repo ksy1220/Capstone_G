@@ -33,7 +33,7 @@ public static class DialogueUtils
             return;
         }
 
-        if (currentDialogues.Count == 0)
+        if (currentDialogues.Count <= index)
         {
             Debug.Log("End of dialogues");
             DialogueController.instance.EndDialogue();

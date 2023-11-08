@@ -15,7 +15,7 @@ public class Stage2Manager : StageManager
 
     void Start()
     {
-        // StartStage2();
+        StartStage2();
         minigameManager = MiniGameCanvas.GetComponent<S2_MinigameManager>();
     }
 
@@ -50,6 +50,11 @@ public class Stage2Manager : StageManager
                 Debug.Log("default action");
                 break;
         }
+    }
+
+    public void AfterMiniGame()
+    {
+        dialogueController.StartDialogue("afterMiniGame");
     }
 
     void ChangeBG(GameObject BGObject)
