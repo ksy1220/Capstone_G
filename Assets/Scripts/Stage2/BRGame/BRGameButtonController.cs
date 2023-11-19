@@ -6,19 +6,21 @@ public class BRGameButtonController : MonoBehaviour
 {
     [SerializeField]
     List<BRGameButton> buttons = new List<BRGameButton>();
-    BRGame gameManager;
+    BRGame brGameManager;
+    StudentUnit playerUnit;
 
-    [SerializeField]
-    TextBalloon playerBalloon;
+    bool called31 = false;
+    bool clicked = false;
 
     void Awake()
     {
         transform.parent.gameObject.SetActive(false);
     }
 
-    public void SetBRGameManager(BRGame gameManager)
+    public void SetBRGameManager(BRGame brGameManager)
     {
-        this.gameManager = gameManager;
+        this.brGameManager = brGameManager;
+        playerUnit = brGameManager.GetManager().playerUnit;
     }
 
     public void SetButtons(int startNum)
@@ -34,13 +36,21 @@ public class BRGameButtonController : MonoBehaviour
 
     public void SayNumber(string text)
     {
-        playerBalloon.SetText(text);
-        gameManager.IncreaseNumber();
+        playerUnit.SayText(text);
+        brGameManager.IncreaseNumber();
+
+        if (text == "31")
+            called31 = true;
+
+        clicked = true;
     }
 
     public void OnClickDone()
     {
-        gameManager.AfterUserInput();
+        if (!clicked) return;
+        clicked = false;
+
+        brGameManager.AfterUserInput(called31);
         transform.parent.gameObject.SetActive(false);
     }
 }

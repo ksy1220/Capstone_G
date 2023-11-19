@@ -33,9 +33,11 @@ public class DialogueController : MonoBehaviour
     // 사용할 csv 대화 파일 이름 
     [SerializeField] string CSVFileName;
 
-    Dictionary<string, Queue<Dialogue>> dialogues;
+    Dictionary<string, List<Dialogue>> dialogues;
 
     SpriteController spriteController;
+
+    string userName = "종익";
 
     void Awake()
     {
@@ -53,6 +55,8 @@ public class DialogueController : MonoBehaviour
         ToggleInteractionOff();
 
         spriteController = SpriteController.GetSpriteController();
+
+        // userName = DataController.instance.GetGameData().userName;
     }
 
     // 토글 터치 후 꺼짐 방지
@@ -87,10 +91,10 @@ public class DialogueController : MonoBehaviour
             case "대사":
                 characterLineToggle.isOn = true;
 
-                lineText.text = dialogue.text;
-                nameText.text = dialogue.name;
+                Sprite sprite = spriteController.GetSprite(dialogue.name);
 
-                Sprite sprite = spriteController.GetSprite(dialogue.name, dialogue.sprite);
+                lineText.text = dialogue.text.Replace("주인공", userName);
+                nameText.text = dialogue.name.Replace("주인공", userName);
 
                 if (sprite == null)
                     characterImage.gameObject.SetActive(false);
@@ -104,7 +108,7 @@ public class DialogueController : MonoBehaviour
 
             case "알림":
                 noticeToggle.isOn = true;
-                noticeText.text = dialogue.text;
+                noticeText.text = dialogue.text.Replace("주인공", userName);
                 SetTouchPanelOn();
                 break;
 
@@ -137,6 +141,10 @@ public class DialogueController : MonoBehaviour
             case "액션":
                 dialougeToggleGroup.SetAllTogglesOff();
                 SetTouchPanelOn();
+                break;
+
+            case "끝":
+                EndDialogue();
                 break;
 
             default:
@@ -183,11 +191,17 @@ public class DialogueController : MonoBehaviour
         DialogueUtils.MoveNext();
     }
 
+    public void SkipDialogue()
+    {
+        DialogueUtils.SkipDialogue();
+    }
+
     // 대화 종료 후 모든 대화창 끄기
     public void EndDialogue()
     {
         dialougeToggleGroup.SetAllTogglesOff();
         TouchPanel.SetActive(false);
+        gameObject.SetActive(false);
     }
 
 }

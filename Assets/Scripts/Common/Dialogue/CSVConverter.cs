@@ -4,7 +4,7 @@ using System.Collections.Generic;
 */
 public static class CSVConverter
 {
-    public static Dictionary<string, Queue<Dialogue>> GetDialogues(string CSVName)
+    public static Dictionary<string, List<Dialogue>> GetDialogues(string CSVName)
     {
         return RefineData(ReadData(CSVName));
     }
@@ -16,9 +16,9 @@ public static class CSVConverter
     }
 
     // 대화 CSV파일을 정리하여 딕셔너리로 반환합니다.
-    static Dictionary<string, Queue<Dialogue>> RefineData(List<Dictionary<string, object>> texts)
+    static Dictionary<string, List<Dialogue>> RefineData(List<Dictionary<string, object>> texts)
     {
-        Dictionary<string, Queue<Dialogue>> temp = new Dictionary<string, Queue<Dialogue>>();
+        Dictionary<string, List<Dialogue>> temp = new Dictionary<string, List<Dialogue>>();
         for (int i = 0; i < texts.Count; i++)
         {
             string category = texts[i]["category"].ToString();
@@ -27,20 +27,19 @@ public static class CSVConverter
             tempDialogue.type = texts[i]["type"].ToString();
             tempDialogue.name = RefineText(texts[i]["name"].ToString());
             tempDialogue.text = RefineText(texts[i]["text"].ToString());
-            tempDialogue.sprite = texts[i]["sprite"].ToString();
             tempDialogue.action = texts[i]["action"].ToString();
             tempDialogue.nextCategory = texts[i]["nextCategory"].ToString();
             tempDialogue.mentalIndex = texts[i]["mental"].ToString() == "" ? 0 : int.Parse(texts[i]["mental"].ToString());
 
             if (!temp.ContainsKey(category))
             {
-                Queue<Dialogue> tempDialogues = new Queue<Dialogue>();
-                tempDialogues.Enqueue(tempDialogue);
+                List<Dialogue> tempDialogues = new List<Dialogue>();
+                tempDialogues.Add(tempDialogue);
                 temp.Add(category, tempDialogues);
             }
             else
             {
-                temp[category].Enqueue(tempDialogue);
+                temp[category].Add(tempDialogue);
             }
         }
         return temp;

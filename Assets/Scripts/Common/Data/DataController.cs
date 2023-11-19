@@ -47,6 +47,11 @@ public class DataController : MonoBehaviour
         LoadData();
     }
 
+    public GameData GetGameData()
+    {
+        return gameData;
+    }
+
     void LoadData()
     {
         if (File.Exists(filePath))

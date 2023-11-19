@@ -10,13 +10,15 @@ public class TextBalloon : MonoBehaviour
     TextMeshProUGUI tmp;
     float fadeTime = 1.0f;
     float colorPerFrame;
+    Image image;
 
     Coroutine currentCoroutine = null;
 
     void Awake()
     {
-        canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup = gameObject.AddComponent<CanvasGroup>();
         tmp = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        image = transform.GetChild(1).GetComponent<Image>();
 
         colorPerFrame = 1 / fadeTime;
 
@@ -33,7 +35,28 @@ public class TextBalloon : MonoBehaviour
     {
         tmp.text = text;
         gameObject.SetActive(true);
+        if (!tmp.gameObject.activeSelf)
+            tmp.gameObject.SetActive(true);
+        if (image.gameObject.activeSelf)
+            image.gameObject.SetActive(false);
 
+        StartFading();
+    }
+
+    public void SetImage(Sprite sprite)
+    {
+        image.sprite = sprite;
+        gameObject.SetActive(true);
+        if (tmp.gameObject.activeSelf)
+            tmp.gameObject.SetActive(false);
+        if (!image.gameObject.activeSelf)
+            image.gameObject.SetActive(true);
+
+        StartFading();
+    }
+
+    void StartFading()
+    {
         Reset();
 
         if (currentCoroutine != null)
