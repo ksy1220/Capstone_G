@@ -1,15 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Stage4Manager : StageManager
+public class Stage4interviewManager : StageManager
 {
     [SerializeField]
     GameObject RoomBG, WaitingBG, InterviewBG1, InterviewBG2, InterviewBG3, library;
     [SerializeField]
-    GameObject BackgroundCanvas, SlidingGameCanvas, EmotionGameCanvas, RSPGameCanvas;
-
+    GameObject BackgroundCanvas;
     GameObject currentBG;
 
     void Start()
@@ -19,10 +17,8 @@ public class Stage4Manager : StageManager
 
     void StartStage4()
     {
-        dialogueController.StartDialogue("1");
-        ChangeBG(RoomBG);
-        /*dialogueController.StartDialogue("interview_waiting");
-        ChangeBG(WaitingBG);*/
+        dialogueController.StartDialogue("interview1");
+        ChangeBG(library);
     }
 
     public override void DoAction(string action)
@@ -30,20 +26,8 @@ public class Stage4Manager : StageManager
         Debug.Log($"Action: {action}");
         switch (action)
         {
-            case "sliding":
-                BackgroundCanvas.SetActive(false);
-                SlidingGameCanvas.SetActive(true);
-                break;
-            case "emotion":
-                BackgroundCanvas.SetActive(false);
-                EmotionGameCanvas.SetActive(true);
-                break;
-            case "rsp":
-                BackgroundCanvas.SetActive(false);
-                RSPGameCanvas.SetActive(true);
-                break;
-            case "ToInterview":
-                ChangeBG(InterviewBG1);
+            case "ToInterviewWaiting":
+                ChangeBG(WaitingBG);
                 break;
             // case "computer":
             //     ChangeBG(ComputerBG);
@@ -70,5 +54,4 @@ public class Stage4Manager : StageManager
         BGObject.SetActive(true);
         currentBG = BGObject;
     }
-   
 }
