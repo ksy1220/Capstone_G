@@ -10,6 +10,7 @@ public class BRGameButtonController : MonoBehaviour
     StudentUnit playerUnit;
 
     bool called31 = false;
+    bool clicked = false;
 
     void Awake()
     {
@@ -40,10 +41,15 @@ public class BRGameButtonController : MonoBehaviour
 
         if (text == "31")
             called31 = true;
+
+        clicked = true;
     }
 
     public void OnClickDone()
     {
+        if (!clicked) return;
+        clicked = false;
+
         brGameManager.AfterUserInput(called31);
         transform.parent.gameObject.SetActive(false);
     }

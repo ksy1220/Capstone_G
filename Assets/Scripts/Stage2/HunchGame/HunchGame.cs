@@ -7,42 +7,45 @@ public class HunchGame : S2_Minigame
     List<StudentUnit> units = new List<StudentUnit>();
     int currNum = 1;
     int maxNum = 6;
-    // 유닛끼리 같은 숫자 외칠 확률 (임시)
-    float prob_unitsTroll = 0.1f;
     Coroutine gameCoroutine;
 
     bool isGameDone = false;
 
     int userNum;
 
-    void Start()
+    public override void SetGame(int startIndex)
     {
+        base.SetGame(startIndex);
+
         foreach (StudentUnit unit in GetManager().units)
         {
             units.Add(unit);
         }
         units.Remove(GetManager().playerUnit);
 
+        transform.GetChild(1).gameObject.SetActive(true);
+    }
+
+    public void OnClickStart()
+    {
+        StudentUnit startUnit = GetManager().units[startIndex];
+
+        if (startUnit != GetManager().playerUnit)
+        {
+            startUnit.SayNumber(1);
+            units.Remove(startUnit);
+            currNum++;
+        }
+
         gameCoroutine = StartCoroutine(Game());
     }
 
-    /*
-        to do: 타이밍 조절
-        예) 4 -> 5 외치는 데 오래 걸림 (어차피 5번은 빨리 외쳐야 함)
-            다음 숫자가 너무 빨리 나올 때가 있음
-    */
     IEnumerator Game()
     {
         StudentUnit curUnit = null;
 
         while (currNum < maxNum)
         {
-            // if (Random.Range(0.0f, 1.0f) <= prob_unitsTroll && units.Count >= 2)
-            // {
-            //     SaySameNumber();
-            //     break;
-            // }
-
             float interval = Random.Range(0.5f, currNum);
             yield return new WaitForSeconds(interval);
             curUnit = GetRandomUnit();
@@ -55,14 +58,6 @@ public class HunchGame : S2_Minigame
             base.EndGame(false, GetManager().playerUnit);
         else
             base.EndGame(true, units[0]);
-    }
-
-    void SaySameNumber()
-    {
-        GetRandomUnit().SayNumber(currNum);
-        GetRandomUnit().SayNumber(currNum);
-
-        Debug.Log("Said same number");
     }
 
     StudentUnit GetRandomUnit()

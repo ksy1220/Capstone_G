@@ -21,6 +21,12 @@ public class BRGame : S2_Minigame
         units = GetManager().units;
         playerIndex = GetManager().playerIndex;
         buttonController.SetBRGameManager(this);
+
+        transform.GetChild(1).gameObject.SetActive(true);
+    }
+
+    public void OnClickStart()
+    {
         StartCoroutine(Game());
     }
 
