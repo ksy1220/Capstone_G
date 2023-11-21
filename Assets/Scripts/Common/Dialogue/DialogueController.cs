@@ -33,7 +33,7 @@ public class DialogueController : MonoBehaviour
     // 사용할 csv 대화 파일 이름 
     [SerializeField] string CSVFileName;
 
-    Dictionary<string, Queue<Dialogue>> dialogues;
+    Dictionary<string, List<Dialogue>> dialogues;
 
     SpriteController spriteController;
 
@@ -72,6 +72,9 @@ public class DialogueController : MonoBehaviour
     // 카테고리 이름으로 대화 시작
     public void StartDialogue(string category)
     {
+        if (!gameObject.activeSelf)
+            gameObject.SetActive(true);
+
         DialogueUtils.SetCurrentDialogues(dialogues[category]);
         DialogueUtils.MoveNext();
     }
@@ -134,6 +137,10 @@ public class DialogueController : MonoBehaviour
             case "액션":
                 dialougeToggleGroup.SetAllTogglesOff();
                 SetTouchPanelOn();
+                break;
+
+            case "끝":
+                EndDialogue();
                 break;
 
             default:
