@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class EmotionGame : MonoBehaviour
 {
@@ -161,10 +162,18 @@ public class EmotionGame : MonoBehaviour
         else
         {
             // 게임 종료 처리
+            StartCoroutine(DisplayResultAndMoveScene("게임종료", 3.0f));
             isGameActive = false;
             Debug.Log("게임 종료");
-            DisplayResult("게임 종료", 1.0f);
         }
+    }
+    IEnumerator DisplayResultAndMoveScene(string message, float delay)
+    {
+        resultText.text = message;
+        yield return new WaitForSeconds(delay);
+
+        // 3초 후에 씬 이동
+        SceneManager.LoadScene("stage4_interview");
     }
     void UpdateCountText()
     {

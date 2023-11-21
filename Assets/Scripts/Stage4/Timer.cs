@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class Timer : MonoBehaviour
+public class timer : MonoBehaviour
 {
     public TextMeshProUGUI timeText; // TMP Text UI를 참조합니다.
     private float elapsedTime = 0f;
