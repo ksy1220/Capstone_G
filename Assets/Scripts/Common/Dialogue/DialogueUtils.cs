@@ -40,8 +40,13 @@ public static class DialogueUtils
             return;
         }
 
-        Dialogue currentDialogue = GetNextDialogue();
-        DialogueController.instance.SetDialogueUI(currentDialogue);
+        if (TypingEffect.instance.IsTyping)
+            TypingEffect.instance.EndTyping();
+        else
+        {
+            Dialogue currentDialogue = GetNextDialogue();
+            DialogueController.instance.SetDialogueUI(currentDialogue);
+        }
     }
 
     public static Dialogue GetNextDialogue()

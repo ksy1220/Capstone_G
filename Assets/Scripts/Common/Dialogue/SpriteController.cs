@@ -14,7 +14,7 @@ public class SpriteController : MonoBehaviour
 
     public Sprite GetSprite(string charName)
     {
-        if (charName == "주인공")
+        if (charName == "나")
             return characterSprites[0];
 
         else if (charName == "대학친구1")
