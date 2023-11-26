@@ -125,14 +125,19 @@ public class BunnyGame : S2_Minigame
     {
         if (correctInput != playerInput)
         {
-            Debug.Log($"땡! / 정답: {correctInput.ToString()}");
-            base.EndGame(false, GetManager().playerUnit);
-            StopCoroutine(coroutine);
+            OnPlayerInputWrong();
         }
         else
         {
             Debug.Log($"정답");
         }
+    }
+
+    public void OnPlayerInputWrong()
+    {
+        Debug.Log($"땡! / 정답: {correctInput.ToString()}");
+        base.EndGame(false, GetManager().playerUnit);
+        StopCoroutine(coroutine);
     }
 
 }

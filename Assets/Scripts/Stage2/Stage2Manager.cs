@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Stage2Manager : StageManager
 {
     [SerializeField]
-    Sprite CoinSongBG, RoomBG, SchoolBG, PCRoomBG, ClassRoomBG, RoadBG;
+    Sprite CoinSongBG, RoomBG, SchoolBG, PCRoomBG, ClassRoomBG, RoadBG, MTBG, CafeBG;
     [SerializeField]
     GameObject BackgroundCanvas, MiniGameCanvas;
     S2_MinigameManager minigameManager;
@@ -49,6 +49,12 @@ public class Stage2Manager : StageManager
                 break;
             case "ToRoad":
                 ChangeBG(RoadBG);
+                break;
+            case "ToMT":
+                ChangeBG(MTBG);
+                break;
+            case "ToCafe":
+                ChangeBG(CafeBG);
                 break;
             case "OffBG":
                 BackgroundCanvas.SetActive(false);
