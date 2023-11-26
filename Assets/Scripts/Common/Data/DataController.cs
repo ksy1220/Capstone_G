@@ -36,6 +36,7 @@ public class DataController : MonoBehaviour
         {
             Debug.Log("destroy data controller");
             Destroy(gameObject);
+            return;
         }
 
         DontDestroyOnLoad(gameObject);
@@ -79,7 +80,7 @@ public class DataController : MonoBehaviour
         Debug.Log("game data saved : " + filePath);
     }
 
-    public void SetMentalIndex(int amount)
+    public void AddMentalIndex(int amount)
     {
         gameData.mentalIndex += amount;
         if (amount != 0)
@@ -87,5 +88,14 @@ public class DataController : MonoBehaviour
             Debug.Log($"멘탈지수: {amount} / 현재 멘탈지수: {gameData.mentalIndex}");
             SaveData();
         }
+    }
+
+    public void ShowEnding(bool interviewPassed)
+    {
+        GameObject endingPrefab = Instantiate(Resources.Load<GameObject>("EndingCanvas"));
+
+        Ending ending = endingPrefab.GetComponent<Ending>();
+
+        ending.SetEnding(gameData.mentalIndex, interviewPassed);
     }
 }
