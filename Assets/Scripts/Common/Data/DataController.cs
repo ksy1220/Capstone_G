@@ -48,6 +48,12 @@ public class DataController : MonoBehaviour
         LoadData();
     }
 
+    public void LoadNewData()
+    {
+        gameData = new GameData();
+        SaveData(1);
+    }
+
     public GameData GetGameData()
     {
         return gameData;
@@ -65,13 +71,15 @@ public class DataController : MonoBehaviour
         }
         else
         {
-            gameData = new GameData();
+            LoadNewData();
         }
     }
 
-    public void SaveData()
+    public void SaveData(int nextStageIndex)
     {
         if (gameData == null) return;
+
+        gameData.currentStage = nextStageIndex;
 
         string jsonData = JsonConvert.SerializeObject(gameData);
 
@@ -86,7 +94,6 @@ public class DataController : MonoBehaviour
         if (amount != 0)
         {
             Debug.Log($"멘탈지수: {amount} / 현재 멘탈지수: {gameData.mentalIndex}");
-            SaveData();
         }
     }
 
