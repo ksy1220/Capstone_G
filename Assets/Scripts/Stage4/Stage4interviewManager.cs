@@ -5,10 +5,13 @@ using UnityEngine;
 public class Stage4interviewManager : StageManager
 {
     [SerializeField]
-    GameObject RoomBG, WaitingBG, InterviewBG1, InterviewBG2, InterviewBG3, library;
+    GameObject RoomBG, WaitingBG, InterviewBG1, InterviewBG2, InterviewBG3, library ,Pass, Fail;
     [SerializeField]
     GameObject BackgroundCanvas;
     GameObject currentBG;
+    
+
+    private int interview_score = 100;
 
     void Start()
     {
@@ -29,15 +32,38 @@ public class Stage4interviewManager : StageManager
             case "ToInterviewWaiting":
                 ChangeBG(WaitingBG);
                 break;
-            // case "computer":
-            //     ChangeBG(ComputerBG);
-            //     break;
-            case "PrintYes":
-                Debug.Log("Yes");
+            case "ToInterview":
+                ChangeBG(InterviewBG1);
                 break;
-            case "PrintNo":
-                Debug.Log("No");
+            case "changeBG_i2":
+                ChangeBG(InterviewBG2);
                 break;
+            case "changeBG_i3":
+                ChangeBG(InterviewBG3);
+                break;
+            case "changeBG_i1":
+                ChangeBG(InterviewBG1);
+                break;
+            case "up":
+                interview_score += 30;
+                break;
+            case "down":
+                interview_score -= 30;
+                break;
+      
+            case "show_result":
+                if(interview_score >= 190)
+                {
+                    ChangeBG(Pass);
+                    break;
+                }
+                else
+                {
+                    ChangeBG(Fail);
+                    break;
+                }
+                
+            
             default:
                 Debug.Log("default action");
                 break;
