@@ -84,6 +84,7 @@ public class DialogueController : MonoBehaviour
     {
         switch (dialogue.type)
         {
+            default:
             case "대사":
                 characterLineToggle.isOn = true;
 
@@ -103,6 +104,7 @@ public class DialogueController : MonoBehaviour
                 break;
 
             case "알림":
+            case "나레이션":
                 noticeToggle.isOn = true;
                 noticeText.text = dialogue.text;
                 SetTouchPanelOn();
@@ -141,10 +143,6 @@ public class DialogueController : MonoBehaviour
 
             case "끝":
                 EndDialogue();
-                break;
-
-            default:
-                Debug.LogError("DialogueController: invalid type");
                 break;
         }
 

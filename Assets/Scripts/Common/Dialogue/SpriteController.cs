@@ -5,8 +5,9 @@ using UnityEngine;
 public class SpriteController : MonoBehaviour
 {
     [SerializeField]
-    Sprite[] characterSprites;
+    List<Sprite> characterSprites;
 
+    List<string> names = new List<string> { "선배1", "대학친구1", "대학친구2", "대학친구3", "대학친구4", "대학교수1", "대학교수2", "대학교수3", "팀원1", "팀원2", "팀원3", "동아리장", "동아리원" };
     public static SpriteController GetSpriteController()
     {
         return Resources.Load<SpriteController>("SpriteController");
@@ -14,12 +15,8 @@ public class SpriteController : MonoBehaviour
 
     public Sprite GetSprite(string charName)
     {
-        if (charName == "나")
-            return characterSprites[0];
+        int index = names.IndexOf(charName);
 
-        else if (charName == "대학친구1")
-            return characterSprites[1];
-
-        return null;
+        return index > -1 ? characterSprites[index] : null;
     }
 }
