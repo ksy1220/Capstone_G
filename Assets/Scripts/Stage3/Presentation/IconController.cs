@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class IconController : MonoBehaviour
@@ -8,6 +10,7 @@ public class IconController : MonoBehaviour
 
     private bool isEyeVisible = false;
     private bool isHeartVisible = false;
+    private float heartVisibleTime = 0f; // 하트 아이콘 표시 시간을 추적하기 위한 변수
     private float timeElapsed = 0f;
     private float minInterval = 10f; // 최소 시간 간격 (초)
     private float maxInterval = 20f; // 최대 시간 간격 (초)
@@ -25,37 +28,40 @@ public class IconController : MonoBehaviour
     }
 
     private void Update()
-    {
-        timeElapsed += Time.deltaTime;
+{
+    timeElapsed += Time.deltaTime;
 
+    if (timeElapsed < 100f)
+    {
         if (timeElapsed >= nextEyeIconTime)
         {
-            // 설정된 다음 눈 아이콘 시간에 눈 아이콘을 나타냅니다.
             ShowEyeIcon();
-            SetNextEyeIconTime(); // 다음 눈 아이콘 시간을 설정합니다.
+            SetNextEyeIconTime();
         }
+    }
 
-        if (isHeartVisible)
+    if (isHeartVisible)
+    {
+        heartVisibleTime += Time.deltaTime; // 하트 아이콘 표시 시간 업데이트
+
+        if (heartVisibleTime >= 0.5f)
         {
-            // 하트 아이콘이 보이고 있는 경우, 0.3초 뒤에 숨깁니다.
-            timeElapsed += Time.deltaTime;
+            HideHeartAndBubble();
+            heartVisibleTime = 0f; // 하트 아이콘 표시 시간 리셋
 
-            if (timeElapsed >= 0.3f)
+            if (timeElapsed < 100f)
             {
-                HideHeartAndBubble();
-
-                // 랜덤하게 다른 학생에게 눈 아이콘을 나타냅니다.
                 ShowRandomEyeIcon();
             }
         }
     }
+}
 
     private void SetNextEyeIconTime()
-    {
-        // 최소 시간 간격과 최대 시간 간격 사이의 무작위 시간을 선택합니다.
-        nextEyeIconTime = Random.Range(minInterval, maxInterval);
-        timeElapsed = 0f; // 타이머를 리셋합니다.
-    }
+{
+    // 현재 timeElapsed에 무작위 시간을 추가하여 다음 눈 아이콘 시간을 설정합니다.
+    nextEyeIconTime = timeElapsed + Random.Range(minInterval, maxInterval);
+}
 
     private void ShowEyeIcon()
     {
@@ -74,6 +80,8 @@ public class IconController : MonoBehaviour
     }
 
     private void ShowRandomEyeIcon()
+{
+    if (timeElapsed < 100f) // 100초가 지나지 않았다면
     {
         // 다른 학생에게 랜덤하게 눈 아이콘을 나타냅니다.
         int randomStudent = Random.Range(1, 7);
@@ -82,19 +90,28 @@ public class IconController : MonoBehaviour
             ShowEyeIcon();
         }
     }
+}
 
     private void OnMouseDown()
     {
         if (isEyeVisible && !isHeartVisible)
-        {
-            // 눈 아이콘을 클릭하면 호출됩니다.
-            // 눈 아이콘을 숨기고 하트 아이콘을 보이게 변경
-            eyeIcon.SetActive(false);
-            heartIcon.SetActive(true);
+    {
+        // 눈 아이콘을 숨깁니다.
+        eyeIcon.SetActive(false);
 
-            // 0.3초 후에 하트 아이콘을 숨깁니다.
-            isHeartVisible = true;
-            timeElapsed = 0f; // 하트 아이콘의 표시 시간을 측정하기 위해 타이머를 리셋합니다.
-        }
-    }
+        // 하트 아이콘을 보여줍니다.
+        heartIcon.SetActive(true);
+
+        // 하트 아이콘의 표시 상태를 true로 설정합니다.
+        isHeartVisible = true;
+
+        // 시간 계산을 위해 타이머를 리셋합니다.
+        heartVisibleTime = 0f;
+
+        // Debugging line to check heart icon activity
+        Debug.Log("Heart Icon Active: " + heartIcon.activeSelf);
+
+        // Rest of your code...
+}
+}
 }
