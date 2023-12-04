@@ -28,10 +28,10 @@ public class Timer : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(countdownTime / 60);
         int seconds = Mathf.FloorToInt(countdownTime % 60);
-        int milliseconds = Mathf.FloorToInt((countdownTime * 1000) % 1000);
+        int milliseconds = Mathf.FloorToInt((countdownTime * 1000) % 100);
 
         minutesText.text = minutes.ToString("00");
         secondsText.text = seconds.ToString("00");
-        millisecondsText.text = milliseconds.ToString("000");
+        millisecondsText.text = milliseconds.ToString("00");
     }
 }

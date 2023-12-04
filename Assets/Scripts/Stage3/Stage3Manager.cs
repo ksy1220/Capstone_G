@@ -5,22 +5,24 @@ using UnityEngine.UI;
 
 public class Stage3Manager : StageManager
 {
-    [SerializeField]
-    GameObject HomeBG, SchoolBG;
-    [SerializeField]
-    GameObject BackgroundCanvas, MiniGameCanvas;
+    [SerializeField] private Sprite RoomBG, ClassRoomBG;
+    [SerializeField] private GameObject BackgroundCanvas, MiniGameCanvas;
+    [SerializeField] private ResearchManager researchManager;
+    [SerializeField] private SlidesManager slidesManager;
+    [SerializeField] private PresentationManager presentationManager;
 
-    GameObject currentBG;
+    private Image BGImg;
 
     void Start()
     {
-        // StartStage3();
+        BGImg = BackgroundCanvas.transform.GetChild(0).GetComponent<Image>();
+        StartStage3();
     }
 
-    void StartStage2()
+    void StartStage3()
     {
         dialogueController.StartDialogue("intro");
-        ChangeBG(HomeBG);
+        ChangeBG(ClassRoomBG);
     }
 
     public override void DoAction(string action)
@@ -28,18 +30,22 @@ public class Stage3Manager : StageManager
         Debug.Log($"Action: {action}");
         switch (action)
         {
-            case "ToSchool":
-                ChangeBG(SchoolBG);
+            case "ToClassroom1":
+                ChangeBG(ClassRoomBG);
                 break;
-            case "StartMiniGame":
+            case "ToRoom":
+                ChangeBG(RoomBG);
+                break;
+            case "StartResearch":
                 BackgroundCanvas.SetActive(false);
                 MiniGameCanvas.SetActive(true);
+                researchManager.StartResearchGame(); // Research 게임 시작
                 break;
-            case "PrintYes":
-                Debug.Log("Yes");
+            case "StartSlides":
+                slidesManager.StartSlidesGame(); // Slides 게임 시작
                 break;
-            case "PrintNo":
-                Debug.Log("No");
+            case "StartPresentation":
+                presentationManager.StartPresentationGame(); // Presentation 게임 시작
                 break;
             default:
                 Debug.Log("default action");
@@ -47,14 +53,11 @@ public class Stage3Manager : StageManager
         }
     }
 
-    void ChangeBG(GameObject BGObject)
+    void ChangeBG(Sprite sprite)
     {
         if (!BackgroundCanvas.activeSelf)
             BackgroundCanvas.SetActive(true);
 
-        if (currentBG != null)
-            currentBG.SetActive(false);
-        BGObject.SetActive(true);
-        currentBG = BGObject;
+        BGImg.sprite = sprite;
     }
 }
