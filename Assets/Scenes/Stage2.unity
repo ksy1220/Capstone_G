@@ -7195,6 +7195,8 @@ MonoBehaviour:
   PCRoomBG: {fileID: 21300000, guid: f09212dba9fc60345bcad2dc3dbcf687, type: 3}
   ClassRoomBG: {fileID: 21300000, guid: 684b7f09436c4a34fa24165c6606ea6f, type: 3}
   RoadBG: {fileID: 21300000, guid: 85c2166dc96ae20489905973a2cefc63, type: 3}
+  MTBG: {fileID: 21300000, guid: 27e3e06ae566c3c47858dec3309afb5e, type: 3}
+  CafeBG: {fileID: 21300000, guid: b0f3dc37dfcfa2a46a1b2502aacb2910, type: 3}
   BackgroundCanvas: {fileID: 58640285}
   MiniGameCanvas: {fileID: 305607162}
 --- !u!1 &1424626296

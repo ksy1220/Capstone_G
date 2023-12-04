@@ -35,6 +35,7 @@ public class BunnyGameButtonController : MonoBehaviour
         if (!clicked)
         {
             Debug.Log("시간 초과!");
+            bunnyGameManager.OnPlayerInputWrong();
         }
     }
 

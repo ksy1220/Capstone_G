@@ -148,7 +148,7 @@ public class DialogueController : MonoBehaviour
                 break;
         }
 
-        DataController.instance.SetMentalIndex(dialogue.mentalIndex);
+        DataController.instance.AddMentalIndex(dialogue.mentalIndex);
 
         if (dialogue.action != "")
         {

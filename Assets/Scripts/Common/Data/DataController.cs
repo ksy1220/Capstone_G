@@ -36,6 +36,7 @@ public class DataController : MonoBehaviour
         {
             Debug.Log("destroy data controller");
             Destroy(gameObject);
+            return;
         }
 
         DontDestroyOnLoad(gameObject);
@@ -45,6 +46,12 @@ public class DataController : MonoBehaviour
     {
         filePath = Path.Combine(Application.persistentDataPath, fileName);
         LoadData();
+    }
+
+    public void LoadNewData()
+    {
+        gameData = new GameData();
+        SaveData(1);
     }
 
     public GameData GetGameData()
@@ -64,13 +71,15 @@ public class DataController : MonoBehaviour
         }
         else
         {
-            gameData = new GameData();
+            LoadNewData();
         }
     }
 
-    public void SaveData()
+    public void SaveData(int nextStageIndex)
     {
         if (gameData == null) return;
+
+        gameData.currentStage = nextStageIndex;
 
         string jsonData = JsonConvert.SerializeObject(gameData);
 
@@ -79,13 +88,21 @@ public class DataController : MonoBehaviour
         Debug.Log("game data saved : " + filePath);
     }
 
-    public void SetMentalIndex(int amount)
+    public void AddMentalIndex(int amount)
     {
         gameData.mentalIndex += amount;
         if (amount != 0)
         {
             Debug.Log($"멘탈지수: {amount} / 현재 멘탈지수: {gameData.mentalIndex}");
-            SaveData();
         }
+    }
+
+    public void ShowEnding(bool interviewPassed)
+    {
+        GameObject endingPrefab = Instantiate(Resources.Load<GameObject>("EndingCanvas"));
+
+        Ending ending = endingPrefab.GetComponent<Ending>();
+
+        ending.SetEnding(gameData.mentalIndex, interviewPassed);
     }
 }
