@@ -9,7 +9,7 @@ public class StoryStageManager : StageManager
     Sprite RoomBG, PCRoomBG, SchoolBG, Class1BG, Class2BG, Class3BG, Class4BG, RoadBG, BarBG, CoinSongBG, MTBG, CafeBG, StoreBG, LibraryBG, InterviewBG;
 
     [SerializeField]
-    GameObject BackgroundCanvas;
+    GameObject BackgroundCanvas, StageEndCanvas;
     GameObject currentBG;
     Image BGImg;
 
@@ -139,6 +139,9 @@ public class StoryStageManager : StageManager
 
             case "StartStage2":
                 SceneController.LoadScene("Stage2");
+                break;
+            case "EndStage":
+                StageEndCanvas.SetActive(true);
                 break;
             default:
                 Debug.Log("default action");

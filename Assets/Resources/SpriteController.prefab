@@ -47,10 +47,10 @@ MonoBehaviour:
   characterSprites:
   - {fileID: 21300000, guid: a017438e53c2f554ca9953b73a3bbbed, type: 3}
   - {fileID: 21300000, guid: e39ea9ecbc13adc41845619fd3d1c237, type: 3}
-  - {fileID: 21300000, guid: 7541fecef277e2347b69abfb79f8b702, type: 3}
+  - {fileID: 21300000, guid: c8e8ee092981b8545b7f8220aef64291, type: 3}
   - {fileID: 21300000, guid: ca8fbf8a9437b414f8137876e73766a1, type: 3}
   - {fileID: 21300000, guid: 09d0b88a0cf74c54ba34245f99c7d161, type: 3}
   - {fileID: 21300000, guid: 3dab2e5e834480b4d815321182c72c2b, type: 3}
   - {fileID: 21300000, guid: 1b13d8da3f3f8ec45afcfd51cbf5bd3c, type: 3}
-  - {fileID: 21300000, guid: fc58f003adda58e44b5daa38e1c82469, type: 3}
+  - {fileID: 21300000, guid: 7541fecef277e2347b69abfb79f8b702, type: 3}
   - {fileID: 21300000, guid: 6244c91dec70a294791cca667840dd43, type: 3}
