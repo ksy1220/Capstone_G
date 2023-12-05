@@ -75,11 +75,17 @@ public class DataController : MonoBehaviour
         }
     }
 
+    public void SetProgress(Progress progress, bool miniGameSucceed = false)
+    {
+        gameData.progress = progress;
+        gameData.miniGameSucceed = miniGameSucceed;
+    }
+
     public void SaveData(int nextStageIndex)
     {
         if (gameData == null) return;
 
-        gameData.currentStage = nextStageIndex;
+        gameData.progress = (Progress)(nextStageIndex * 10);
 
         string jsonData = JsonConvert.SerializeObject(gameData);
 

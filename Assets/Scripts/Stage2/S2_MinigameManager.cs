@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class S2_MinigameManager : MonoBehaviour
 {
     int alcoholGauge = 0;
-    int maxGameNum = 4;
     int maxAlcoholGauge = 3;
 
     [SerializeField]
@@ -88,7 +87,7 @@ public class S2_MinigameManager : MonoBehaviour
         }
         Debug.Log("Start next game");
         int startIndex = loserUnit == null ? playerIndex : loserUnit.transform.GetSiblingIndex();
-        Debug.Log($"loser unit index : {startIndex}");
+        Debug.Log($"game index: {index} / loser unit index : {startIndex}");
 
         MinigamePrefabs[index++].SetGame(startIndex);
     }
@@ -99,6 +98,8 @@ public class S2_MinigameManager : MonoBehaviour
         ResultPanel.SetActive(true);
         ResultPanel.transform.GetChild(0).GetComponent<Image>().sprite = isWin ? clearImg : failImg;
         Debug.Log("EndMiniGame " + isWin.ToString());
+
+        DataController.instance.SetProgress(Progress.stage2_afterMiniGame, isWin);
     }
 
 }

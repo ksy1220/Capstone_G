@@ -349,7 +349,8 @@ MonoBehaviour:
   LibraryBG: {fileID: 21300000, guid: e031e04862442bc49b8132768fdf1a0b, type: 3}
   InterviewBG: {fileID: 21300000, guid: 9d7fce4ccba555d46a6fdc45652dc6f0, type: 3}
   BackgroundCanvas: {fileID: 658276252}
-  startingCategory: stage4
+  startingProgress: 20
+  miniGameSucceed: 0
 --- !u!4 &269319082
 Transform:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class Main : MonoBehaviour
 
     void Start()
     {
-        if (DataController.instance.GetGameData().currentStage <= 1)
+        if (DataController.instance.GetGameData().progress == Progress.stage1)
             continueBtn.interactable = false;
 
         continueBtn.onClick.AddListener(() => OnClickStart(false));

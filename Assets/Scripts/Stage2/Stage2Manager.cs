@@ -15,8 +15,7 @@ public class Stage2Manager : StageManager
     void Start()
     {
         minigameManager = MiniGameCanvas.GetComponent<S2_MinigameManager>();
-
-        minigameManager.StartNextGame();
+        MiniGameCanvas.SetActive(true);
     }
 
 
@@ -25,9 +24,6 @@ public class Stage2Manager : StageManager
         Debug.Log($"Action: {action}");
         switch (action)
         {
-            case "StartMiniGame":
-                MiniGameCanvas.SetActive(true);
-                break;
             case "StartNextGame":
                 minigameManager.StartNextGame();
                 break;
@@ -39,6 +35,6 @@ public class Stage2Manager : StageManager
 
     public void AfterMiniGame()
     {
-        dialogueController.StartDialogue("afterMiniGame");
+        SceneController.LoadStoryScene();
     }
 }

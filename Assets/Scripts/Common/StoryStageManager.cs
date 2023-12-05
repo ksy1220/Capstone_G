@@ -13,13 +13,74 @@ public class StoryStageManager : StageManager
     GameObject currentBG;
     Image BGImg;
 
-    [SerializeField]
-    string startingCategory;
-
     void Start()
     {
         BGImg = BackgroundCanvas.transform.GetChild(0).GetComponent<Image>();
-        dialogueController.StartDialogue(startingCategory);
+        StartDialogue();
+    }
+
+    void StartDialogue()
+    {
+        string startingCategory = "";
+
+        switch (DataController.instance.GetGameData().progress)
+        {
+            // 1학년 시작
+            case Progress.start:
+            case Progress.stage1:
+                startingCategory = "stage1";
+                break;
+
+            // 1학년 미니게임 이후
+            case Progress.stage1_afterMiniGame:
+                if (DataController.instance.GetGameData().miniGameSucceed)
+                    startingCategory = "s1_success";
+                else
+                    startingCategory = "s1_fail";
+                break;
+
+            // 1학년 두 번째 미니게임 이후
+            case Progress.stage1_afterSecondMiniGame:
+                startingCategory = "s1_afterGame";
+                break;
+
+            // 2학년 시작
+            case Progress.stage2:
+                startingCategory = "stage2";
+                break;
+
+            // 2학년 미니게임 이후
+            case Progress.stage2_afterMiniGame:
+                if (DataController.instance.GetGameData().miniGameSucceed)
+                    startingCategory = "s2_success";
+                else
+                    startingCategory = "s2_fail";
+                break;
+
+
+            // 3학년 시작
+            case Progress.stage3:
+                startingCategory = "stage3";
+                break;
+
+            // 3학년 미니게임 이후
+            case Progress.stage3_afterMiniGame:
+                if (DataController.instance.GetGameData().miniGameSucceed)
+                    startingCategory = "s3_success";
+                else
+                    startingCategory = "s3_fail";
+                break;
+
+            // 4학년 시작
+            case Progress.stage4:
+                startingCategory = "stage4";
+                break;
+        }
+
+        if (startingCategory == "")
+            Debug.LogError("StoryStageManager : check starting category");
+        else
+            dialogueController.StartDialogue(startingCategory);
     }
 
     public override void DoAction(string action)
@@ -74,6 +135,10 @@ public class StoryStageManager : StageManager
                 break;
             case "OffBG":
                 BackgroundCanvas.SetActive(false);
+                break;
+
+            case "StartStage2":
+                SceneController.LoadScene("Stage2");
                 break;
             default:
                 Debug.Log("default action");
