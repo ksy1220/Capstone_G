@@ -51,7 +51,7 @@ public class DataController : MonoBehaviour
     public void LoadNewData()
     {
         gameData = new GameData();
-        SaveData(1);
+        SetProgress(Progress.stage1);
     }
 
     public GameData GetGameData()
@@ -75,17 +75,27 @@ public class DataController : MonoBehaviour
         }
     }
 
-    public void SaveData(int nextStageIndex)
+    public void SetProgress(Progress progress, bool miniGameSucceed = false)
+    {
+        gameData.progress = progress;
+        gameData.miniGameSucceed = miniGameSucceed;
+    }
+
+    public void SaveData()
     {
         if (gameData == null) return;
-
-        gameData.currentStage = nextStageIndex;
 
         string jsonData = JsonConvert.SerializeObject(gameData);
 
         File.WriteAllText(filePath, jsonData);
 
         Debug.Log("game data saved : " + filePath);
+    }
+
+    public void ToNextStage()
+    {
+        int nextStageIndex = (int)gameData.progress / 10 + 1;
+        gameData.progress = (Progress)(nextStageIndex * 10);
     }
 
     public void AddMentalIndex(int amount)
