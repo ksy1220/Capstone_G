@@ -120,6 +120,9 @@ public class ClassRegistrationTimer : MonoBehaviour
         if (clickedButtons.Count == registrationButtons.Length &&
             !finalSuccessPanel.activeSelf && !finalFailurePanel.activeSelf)
         {
+            Progress nextProgress = DataController.instance.GetGameData().progress + 1;
+            DataController.instance.SetProgress(nextProgress, successCount >= 5);
+
             // 최종 결과에 따라 적절한 최종 패널 표시
             if (successCount >= 5)
             {

@@ -64,9 +64,4 @@ public class Stage3Manager : StageManager
 
         BGImg.sprite = sprite;
     }
-
-    public void AfterMiniGame()
-    {
-        SceneController.LoadStoryScene();
-    }
 }
