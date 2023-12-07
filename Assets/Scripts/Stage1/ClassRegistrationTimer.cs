@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
+using TMPro;
 
 public class ClassRegistrationTimer : MonoBehaviour
 {
@@ -21,12 +22,12 @@ public class ClassRegistrationTimer : MonoBehaviour
     public GameObject finalFailurePanel; // 최종 실패 패널
     private HashSet<Button> clickedButtons = new HashSet<Button>(); // 클릭된 버튼들을 추적
     private int successCount = 0;
-    
 
-    
-    
-    
-    
+
+
+
+
+
 
     void Start()
     {
@@ -34,9 +35,9 @@ public class ClassRegistrationTimer : MonoBehaviour
         UpdateTimerDisplay();
         SetButtonsActive(false);
         successPanel.SetActive(false);
-        failurePanel.SetActive(false); 
+        failurePanel.SetActive(false);
         successPanelConfirmButton.onClick.AddListener(ClosePanel);
-        failurePanelConfirmButton.onClick.AddListener(ClosePanel); 
+        failurePanelConfirmButton.onClick.AddListener(ClosePanel);
     }
 
     void ClosePanel()
@@ -50,7 +51,7 @@ public class ClassRegistrationTimer : MonoBehaviour
 
 
 
-    
+
     void Update()
     {
         currentTime = currentTime.Add(TimeSpan.FromSeconds(Time.deltaTime));
@@ -77,7 +78,7 @@ public class ClassRegistrationTimer : MonoBehaviour
             failurePanel.SetActive(true);
             return;
         }
-        
+
         if (!clickedButtons.Contains(button))
         {
 
@@ -89,7 +90,7 @@ public class ClassRegistrationTimer : MonoBehaviour
                 successPanel.SetActive(true);
                 successCount++; // 성공 카운트 증가
                 button.interactable = false; // 해당 버튼 비활성화
-                button.GetComponentInChildren<Text>().text = "완료"; // 버튼 텍스트 변경
+                button.GetComponentInChildren<TextMeshProUGUI>().text = "완료"; // 버튼 텍스트 변경
             }
             else
             {
@@ -98,7 +99,7 @@ public class ClassRegistrationTimer : MonoBehaviour
                 failedButtons.Add(button);
             }
 
-            
+
 
             // 다음 버튼 클릭을 위해 타이머 재설정
             timeSinceLastButtonPressed = 0f;
@@ -110,7 +111,7 @@ public class ClassRegistrationTimer : MonoBehaviour
                 EvaluateFinalResult();
             }
         }
-    
+
     }
 
     void EvaluateFinalResult()
@@ -131,10 +132,10 @@ public class ClassRegistrationTimer : MonoBehaviour
         }
     }
 
-    
-    
-    
-    
+
+
+
+
     void UpdateTimerDisplay()
     {
         timerText.text = currentTime.ToString("hh':'mm':'ss");
@@ -163,7 +164,7 @@ public class ClassRegistrationTimer : MonoBehaviour
     }
 
 
- 
 
-    
+
+
 }
