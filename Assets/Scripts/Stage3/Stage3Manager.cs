@@ -16,7 +16,11 @@ public class Stage3Manager : StageManager
     void Start()
     {
         BGImg = BackgroundCanvas.transform.GetChild(0).GetComponent<Image>();
-        StartStage3();
+
+        // 바로 게임 시작
+        BackgroundCanvas.SetActive(false);
+        MiniGameCanvas.SetActive(true);
+        researchManager.StartResearchGame();
     }
 
     void StartStage3()
@@ -59,5 +63,10 @@ public class Stage3Manager : StageManager
             BackgroundCanvas.SetActive(true);
 
         BGImg.sprite = sprite;
+    }
+
+    public void AfterMiniGame()
+    {
+        SceneController.LoadStoryScene();
     }
 }

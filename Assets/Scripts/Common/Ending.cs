@@ -67,6 +67,7 @@ public class Ending : MonoBehaviour
 
     public void OnClickToMain()
     {
+        DataController.instance.LoadNewData();
         SceneController.LoadScene("Main");
     }
 
