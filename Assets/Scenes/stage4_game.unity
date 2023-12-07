@@ -183,7 +183,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 26931fc3b4ef85842aaa089ee3c05e71, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -789,7 +789,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 73a7b699d454f3845988989fcd8ebb97, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -999,7 +999,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 37b6bfd3934ed874b876a11dd4a90d42, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1514,7 +1514,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: acf44710dab818c45b6b218f0bafe3c7, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1548,7 +1548,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &324638733
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1581,7 +1581,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dbb597e4dc2594ea5cb62fb6e93fd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeText: {fileID: 0}
+  minutesText: {fileID: 0}
+  secondsText: {fileID: 0}
+  millisecondsText: {fileID: 0}
 --- !u!114 &324638735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2069,7 +2071,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &452473867
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2102,7 +2104,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dbb597e4dc2594ea5cb62fb6e93fd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeText: {fileID: 0}
+  minutesText: {fileID: 0}
+  secondsText: {fileID: 0}
+  millisecondsText: {fileID: 0}
 --- !u!114 &452473869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2905,7 +2909,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.3254902, g: 0.5686275, b: 0.69803923, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -2919,7 +2923,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1541153062}
   m_FillRect: {fileID: 566428633}
   m_HandleRect: {fileID: 1541153061}
@@ -2991,7 +2995,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 9d7fce4ccba555d46a6fdc45652dc6f0, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -3429,7 +3433,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 95b232d1f2e9e9d4cbfd06516382e8e6, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -5181,7 +5185,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: f942023056c068946bf484778c1108e8, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -6189,8 +6193,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -300, y: 530}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -392, y: 530}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1339528231
 MonoBehaviour:
@@ -6212,7 +6216,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC815\uB2F5! "
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e276a07969a37cf49829d7f8616528ba, type: 2}
   m_sharedMaterial: {fileID: 2279698483732340657, guid: e276a07969a37cf49829d7f8616528ba, type: 2}
@@ -6246,7 +6250,7 @@ MonoBehaviour:
   m_fontSizeMin: 23.5
   m_fontSizeMax: 94
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -6414,13 +6418,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueController: {fileID: 263316010}
-  CoinSongBG: {fileID: 0}
-  RoomBG: {fileID: 0}
-  SchoolBG: {fileID: 323624741}
-  PCRoomBG: {fileID: 0}
-  ClassRoomBG: {fileID: 0}
-  RoadBG: {fileID: 0}
-  BackgroundCanvas: {fileID: 58640285}
   MiniGameCanvas: {fileID: 0}
 --- !u!114 &1406437113
 MonoBehaviour:

@@ -6709,8 +6709,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Stage2Manager, Assembly-CSharp
+      - m_Target: {fileID: 1406437112}
+        m_TargetAssemblyTypeName: Stage3Manager, Assembly-CSharp
         m_MethodName: AfterMiniGame
         m_Mode: 1
         m_Arguments:
@@ -9773,7 +9773,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5333047683104997059, guid: 28f411d668c381141865830a862fd976, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5333047683104997071, guid: 28f411d668c381141865830a862fd976, type: 3}
       propertyPath: m_Pivot.x

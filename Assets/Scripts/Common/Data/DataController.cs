@@ -52,6 +52,8 @@ public class DataController : MonoBehaviour
     {
         gameData = new GameData();
         SetProgress(Progress.stage1);
+
+        SaveData();
     }
 
     public GameData GetGameData()
@@ -100,7 +102,8 @@ public class DataController : MonoBehaviour
 
     public void AddMentalIndex(int amount)
     {
-        gameData.mentalIndex += amount;
+        gameData.mentalIndex = Mathf.Max(0, gameData.mentalIndex + amount);
+
         if (amount != 0)
         {
             Debug.Log($"멘탈지수: {amount} / 현재 멘탈지수: {gameData.mentalIndex}");
