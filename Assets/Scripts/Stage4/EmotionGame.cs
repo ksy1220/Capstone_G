@@ -15,7 +15,7 @@ public class EmotionGame : MonoBehaviour
     public TextMeshProUGUI resultText;
     public TextMeshProUGUI countText;
 
-    private int[] answer = { 0,2,7,7,2,1 };
+    private int[] answer = { 0, 2, 7, 7, 2, 1 };
     private int currentQuestion = 0; // 초기 이미지 인덱스
     private int correctAnswers = 0; // 맞춘 문제 수
     private bool isGameActive = true;
@@ -45,8 +45,9 @@ public class EmotionGame : MonoBehaviour
             if (timeRemaining <= 0)
             {
                 // 시간 종료 시 처리
-                DisplayResult("시간 초과", 1.0f); // 시간 초과 메시지
-                NextQuestion();
+                Debug.Log("시간초과");
+                StartCoroutine(DisplayResult("시간 초과", 1.0f)); // 시간 초과 메시지
+                timeRemaining = questionTimeLimit;
             }
         }
     }
@@ -136,7 +137,9 @@ public class EmotionGame : MonoBehaviour
     private IEnumerator DisplayResult(string message, float delay)
     {
         resultText.text = message;
+        isGameActive = false;
         yield return new WaitForSeconds(delay);
+        isGameActive = true;
         resultText.text = "";
         NextQuestion();
     }
@@ -170,6 +173,7 @@ public class EmotionGame : MonoBehaviour
     IEnumerator DisplayResultAndMoveScene(string message, float delay)
     {
         resultText.text = message;
+
         yield return new WaitForSeconds(delay);
 
         // 3초 후에 씬 이동
@@ -178,7 +182,7 @@ public class EmotionGame : MonoBehaviour
     void UpdateCountText()
     {
         // count 텍스트 업데이트
-        countText.text = "문제: " + (currentQuestion + 1) + " / 맞춘 문제: " + correctAnswers;
+        countText.text = "문제: " + (currentQuestion + 1) + " / 맞힌 문제: " + correctAnswers;
     }
 
     public void ButtonClicked(int buttonIndex)

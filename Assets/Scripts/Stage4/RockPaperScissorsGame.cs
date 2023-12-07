@@ -29,7 +29,7 @@ public class RockPaperScissorsGame : MonoBehaviour
         {
             initial();
             int roundtext = currentGame + 1;
-            round.text = "< " +roundtext+ " 라운드 >";
+            round.text = "< " + roundtext + " 라운드 >";
             number = Random.Range(1, 7);
             ShowRandomScenario(number);
             timeRemaining = questionTimeLimit;
@@ -41,7 +41,6 @@ public class RockPaperScissorsGame : MonoBehaviour
                 UpdateTimerSlider();
                 yield return null;
             }
-
             yield return new WaitForSeconds(1.0f); // Delay between rounds
         }
 
@@ -106,7 +105,7 @@ public class RockPaperScissorsGame : MonoBehaviour
     {
         // 현재 시나리오에 대한 정답 가져오기
         int currentScenarioIndex = number;
-        string correctAnswer = correctAnswers[currentScenarioIndex-1];
+        string correctAnswer = correctAnswers[currentScenarioIndex - 1];
 
         // 사용자 선택과 정답 비교
         if (userChoice.Equals(correctAnswer))
@@ -156,7 +155,7 @@ public class RockPaperScissorsGame : MonoBehaviour
     {
         if (userChoice == "Rock")
         {
-            if(number < 4)
+            if (number < 4)
             {
                 rps_computer.SetActive(false);
                 image5.SetActive(true);
@@ -196,21 +195,27 @@ public class RockPaperScissorsGame : MonoBehaviour
     }
     public void OnRockButtonClicked()
     {
+        if (!isGameActive) return;
+        isGameActive = false;
         ChangeImage("Rock");
-        CheckAnswer("Rock"); 
+        CheckAnswer("Rock");
     }
 
     public void OnScissorButtonClicked()
     {
+        if (!isGameActive) return;
+        isGameActive = false;
         ChangeImage("Scissor");
         CheckAnswer("Scissor");
-        
+
     }
 
     public void OnPaperButtonClicked()
     {
+        if (!isGameActive) return;
+        isGameActive = false;
         ChangeImage("Paper");
-        CheckAnswer("Paper");   
+        CheckAnswer("Paper");
     }
 
 }
