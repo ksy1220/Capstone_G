@@ -32,9 +32,4 @@ public class Stage2Manager : StageManager
                 break;
         }
     }
-
-    public void AfterMiniGame()
-    {
-        SceneController.LoadStoryScene();
-    }
 }
