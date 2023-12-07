@@ -137,8 +137,17 @@ public class StoryStageManager : StageManager
                 BackgroundCanvas.SetActive(false);
                 break;
 
+            case "StartStage1":
+                SceneController.LoadScene("Stage1");
+                break;
             case "StartStage2":
                 SceneController.LoadScene("Stage2");
+                break;
+            case "StartStage3":
+                SceneController.LoadScene("Stage3");
+                break;
+            case "StartStage4":
+                SceneController.LoadScene("stage4_game");
                 break;
             case "EndStage":
                 StageEndCanvas.SetActive(true);
