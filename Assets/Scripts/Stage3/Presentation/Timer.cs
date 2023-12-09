@@ -9,7 +9,7 @@ public class Timer : MonoBehaviour
     public TextMeshProUGUI secondsText;
     public TextMeshProUGUI millisecondsText;
 
-    private float countdownTime = 120.0f; // 3 분을 초로 표현
+    private float countdownTime = 60.0f; // 분을 초로 표현
 
     private void Update()
     {

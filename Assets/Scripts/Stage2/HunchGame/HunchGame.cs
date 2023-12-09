@@ -75,6 +75,8 @@ public class HunchGame : S2_Minigame
     {
         if (userNum > 0 || isGameDone) return;
 
+        SoundManager.instance.PlaySFX(Sfx.button_ui);
+
         GetManager().playerUnit.SayNumber(num);
         userNum = num;
 

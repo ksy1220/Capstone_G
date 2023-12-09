@@ -42,6 +42,8 @@ public class ClassRegistrationTimer : MonoBehaviour
 
     void ClosePanel()
     {
+        SoundManager.instance.PlaySFX(Sfx.button_ui);
+
         successPanel.SetActive(false);
         failurePanel.SetActive(false);
 
@@ -151,7 +153,7 @@ public class ClassRegistrationTimer : MonoBehaviour
             btn.interactable = active;
             if (active)
             {
-                btn.onClick.AddListener(() => RegisterCourse(btn));
+                btn.onClick.AddListener(() => { RegisterCourse(btn); SoundManager.instance.PlaySFX(Sfx.button_click);});
             }
             else
             {
