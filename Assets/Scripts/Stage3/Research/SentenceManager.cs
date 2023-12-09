@@ -26,34 +26,36 @@ public class SentenceManager : MonoBehaviour
         float verticalSpacing = 0f; // 원하는 세로 간격 설정
         Vector3 spawnPosition = Vector3.zero; // 초기 생성 위치 설정
 
-    for (int i = 0; i < sentences.Length; i++)
+        for (int i = 0; i < sentences.Length; i++)
         {
             GameObject sentenceObj = Instantiate(sentencePrefab, sentencesContainer.transform, false);
             sentenceObj.transform.localPosition = spawnPosition; // 생성 위치 설정
-        // 아래의 코드를 TextMeshPro 컴포넌트를 찾도록 수정합니다.
-        TMPro.TextMeshProUGUI sentenceText = sentenceObj.GetComponentInChildren<TMPro.TextMeshProUGUI>();
-        sentenceText.text = sentences[i];
+                                                                 // 아래의 코드를 TextMeshPro 컴포넌트를 찾도록 수정합니다.
+            TMPro.TextMeshProUGUI sentenceText = sentenceObj.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+            sentenceText.text = sentences[i];
 
-        int sentenceIndex = i;
-        // Button 컴포넌트가 있는지 확인합니다.
-        Button buttonComp = sentenceObj.GetComponentInChildren<Button>();
-        if (buttonComp != null)
-        {
-            buttonComp.onClick.AddListener(() => OnSentenceClicked(sentenceIndex));
-        }
-        else
-        {
-            Debug.LogError("Button component is not found in the sentence prefab");
-        }
+            int sentenceIndex = i;
+            // Button 컴포넌트가 있는지 확인합니다.
+            Button buttonComp = sentenceObj.GetComponentInChildren<Button>();
+            if (buttonComp != null)
+            {
+                buttonComp.onClick.AddListener(() => OnSentenceClicked(sentenceIndex));
+            }
+            else
+            {
+                Debug.LogError("Button component is not found in the sentence prefab");
+            }
 
-        // 다음 프리팹을 생성할 때 세로 간격을 고려하여 spawnPosition 조절
+            // 다음 프리팹을 생성할 때 세로 간격을 고려하여 spawnPosition 조절
             spawnPosition += new Vector3(0f, -verticalSpacing, 0f);
-        scoresPerSentence.Add(scores[i]);
+            scoresPerSentence.Add(scores[i]);
+        }
     }
-}
 
     private void OnSentenceClicked(int sentenceIndex)
     {
+        SoundManager.instance.PlaySFX(Sfx.button_ui);
+
         // 클릭된 문장이 이미 하이라이트 상태인 경우 해제하고 리턴
         if (isSentenceHighlighted)
         {
@@ -89,35 +91,35 @@ public class SentenceManager : MonoBehaviour
         }
     }
 
-private void HighlightSelectedSentence()
-{
-    foreach (Transform child in sentencesContainer)
+    private void HighlightSelectedSentence()
     {
-        // 모든 문장의 하이라이트를 해제
-        Image highlightImage = child.GetComponent<Image>();
-        if (highlightImage != null)
+        foreach (Transform child in sentencesContainer)
         {
-            highlightImage.color = Color.white; // 기본색상으로 설정
-        }
-    }
-
-    if (selectedSentences.Count > 0)
-    {
-        // 선택된 문장이 있다면 해당 문장의 하이라이트를 설정
-        foreach (int sentenceIndex in selectedSentences)
-        {
-            Transform selectedChild = sentencesContainer.GetChild(sentenceIndex);
-            Image highlightImage = selectedChild.GetComponent<Image>();
+            // 모든 문장의 하이라이트를 해제
+            Image highlightImage = child.GetComponent<Image>();
             if (highlightImage != null)
             {
-                highlightImage.color = Color.yellow; // 노란색으로 하이라이트 설정
+                highlightImage.color = Color.white; // 기본색상으로 설정
             }
         }
-    }
 
-    // 디버그 로그를 추가하여 메서드가 호출되었음을 확인
-    Debug.Log("HighlightSelectedSentence method called.");
-}
+        if (selectedSentences.Count > 0)
+        {
+            // 선택된 문장이 있다면 해당 문장의 하이라이트를 설정
+            foreach (int sentenceIndex in selectedSentences)
+            {
+                Transform selectedChild = sentencesContainer.GetChild(sentenceIndex);
+                Image highlightImage = selectedChild.GetComponent<Image>();
+                if (highlightImage != null)
+                {
+                    highlightImage.color = Color.yellow; // 노란색으로 하이라이트 설정
+                }
+            }
+        }
+
+        // 디버그 로그를 추가하여 메서드가 호출되었음을 확인
+        Debug.Log("HighlightSelectedSentence method called.");
+    }
 
     public int CalculateButtonScore()
     {

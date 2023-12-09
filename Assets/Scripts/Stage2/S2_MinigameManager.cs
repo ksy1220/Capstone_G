@@ -97,6 +97,10 @@ public class S2_MinigameManager : MonoBehaviour
         GetComponent<ToggleGroup>().SetAllTogglesOff();
         ResultPanel.SetActive(true);
         ResultPanel.transform.GetChild(0).GetComponent<Image>().sprite = isWin ? clearImg : failImg;
+
+        Sfx sfx = isWin ? Sfx.success : Sfx.fail;
+        SoundManager.instance.PlaySFX(sfx);
+
         Debug.Log("EndMiniGame " + isWin.ToString());
 
         DataController.instance.SetProgress(Progress.stage2_afterMiniGame, isWin);

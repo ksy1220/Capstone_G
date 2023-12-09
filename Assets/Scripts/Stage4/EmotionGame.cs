@@ -189,6 +189,8 @@ public class EmotionGame : MonoBehaviour
     {
         if (isGameActive)
         {
+            SoundManager.instance.PlaySFX(Sfx.button_ui);
+
             if (IsCorrectAnswer(buttonIndex))
             {
                 StartCoroutine(DisplayResult("정답!", 1.0f));

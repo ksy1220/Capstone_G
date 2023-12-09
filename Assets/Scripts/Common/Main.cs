@@ -20,5 +20,7 @@ public class Main : MonoBehaviour
         if (isNewGame)
             DataController.instance.LoadNewData();
         SceneController.LoadScene("Story");
+
+        SoundManager.instance.PlayMainBGM();
     }
 }

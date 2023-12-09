@@ -98,7 +98,8 @@ public class PresentationManager : MonoBehaviour
     IEnumerator SlideShowCoroutine()
     {
         Debug.Log("SlideShowCoroutine started"); // 코루틴 시작 시 출력
-        float timer = 120.0f; // 2분 타이머
+        float timer = 60.0f; // 1분 타이머
+        float interval = timer / 8;
 
         while (timer > 0)
         {
@@ -109,8 +110,8 @@ public class PresentationManager : MonoBehaviour
             Debug.Log("Current Slide (Calculated): " + currentSlide);
 
             InitializeButtonContents(); // 슬라이드마다 버튼 내용 업데이트
-            yield return new WaitForSeconds(15);
-            timer -= 15;
+            yield return new WaitForSeconds(interval);
+            timer -= interval;
             currentSlideIndex++;
             if (currentSlideIndex >= slideSprites.Length)
             {
@@ -170,6 +171,9 @@ public class PresentationManager : MonoBehaviour
 
         resultPanel.SetActive(true);
         resultPanel.transform.GetChild(0).GetComponent<Image>().sprite = isWin ? clearImg : failImg;
+
+        Sfx sfx = isWin ? Sfx.success : Sfx.fail;
+        SoundManager.instance.PlaySFX(sfx);
 
         // 최종 점수 로그 출력
         Debug.Log("EndMiniGame " + isWin.ToString() + ". Total Score: " + totalScore);

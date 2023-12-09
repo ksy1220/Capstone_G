@@ -34,6 +34,8 @@ public class Ending : MonoBehaviour
 
         touchAreaButton = gameObject.AddComponent<Button>();
         touchAreaButton.onClick.AddListener(OnClickText);
+
+        SoundManager.instance.PlayEndingBGM();
     }
 
     //     0           1            2              3            4          5
@@ -69,6 +71,8 @@ public class Ending : MonoBehaviour
     {
         DataController.instance.LoadNewData();
         SceneController.LoadScene("Main");
+
+        SoundManager.instance.StopBGM();
     }
 
     void ShowToMainButton()

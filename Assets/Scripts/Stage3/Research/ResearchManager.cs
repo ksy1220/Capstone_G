@@ -17,7 +17,7 @@ public class ResearchManager : MonoBehaviour
     private int completedButtons = 0;
     private bool[] buttonCompletionStates;
     private string[][] researchSentences = new string[][]
-    
+
 {
     new string[] // 주제 1에 대한 문장들
 {
@@ -70,8 +70,8 @@ public class ResearchManager : MonoBehaviour
     }
 };
 
-private int[][] researchScores = new int[][]
-{
+    private int[][] researchScores = new int[][]
+    {
     new int[] // 주제 1에 대한 각 문장의 점수
 {
     1, 0, 1, 3, 1, 2, 3, 1, 2, 0, 3, 2, 0, 0
@@ -85,70 +85,72 @@ private int[][] researchScores = new int[][]
         2, 0, 2, 2, 1, 0, 2, 1, 3, 0, 2, 2, 1
     }
     // 추가 주제에 대한 점수 배열
-};
+    };
 
     public void StartResearchGame()
-{
-    textPanel.SetActive(false);
-    completeButton.gameObject.SetActive(false);
-    nextStageButton.gameObject.SetActive(false);
-
-    buttonCompletionStates = new bool[researchButtons.Length];
-    for (int i = 0; i < researchButtons.Length; i++)
     {
-        int index = i; // 임시 변수를 생성
-        researchButtons[i].onClick.AddListener(() => OnResearchButtonClicked(index));
-    }
+        textPanel.SetActive(false);
+        completeButton.gameObject.SetActive(false);
+        nextStageButton.gameObject.SetActive(false);
 
-    completeButton.onClick.AddListener(OnCompleteButtonClicked);
-    nextStageButton.gameObject.SetActive(false); // 시작 시 NextStageButton을 비활성화
-    nextStageButton.onClick.AddListener(StartNextGame); // NextStageButton 클릭 이벤트 설정
-}
-
-void OnResearchButtonClicked(int buttonIndex)
-{
-    textPanel.SetActive(true);
-    completeButton.gameObject.SetActive(true);
-
-    if (researchSentences != null && researchScores != null && sentenceManager != null)
-    {
-        if (buttonIndex < 0 || buttonIndex >= researchSentences.Length || buttonIndex >= researchScores.Length)
+        buttonCompletionStates = new bool[researchButtons.Length];
+        for (int i = 0; i < researchButtons.Length; i++)
         {
-            Debug.LogError("Button index is out of range!");
-            return;
+            int index = i; // 임시 변수를 생성
+            researchButtons[i].onClick.AddListener(() => OnResearchButtonClicked(index));
         }
 
-        if (researchSentences[buttonIndex] == null || researchScores[buttonIndex] == null)
+        completeButton.onClick.AddListener(OnCompleteButtonClicked);
+        nextStageButton.gameObject.SetActive(false); // 시작 시 NextStageButton을 비활성화
+        nextStageButton.onClick.AddListener(StartNextGame); // NextStageButton 클릭 이벤트 설정
+    }
+
+    void OnResearchButtonClicked(int buttonIndex)
+    {
+        textPanel.SetActive(true);
+        completeButton.gameObject.SetActive(true);
+
+        if (researchSentences != null && researchScores != null && sentenceManager != null)
         {
-            Debug.LogError("Sentences or scores array is null at index: " + buttonIndex);
-            return;
+            if (buttonIndex < 0 || buttonIndex >= researchSentences.Length || buttonIndex >= researchScores.Length)
+            {
+                Debug.LogError("Button index is out of range!");
+                return;
+            }
+
+            if (researchSentences[buttonIndex] == null || researchScores[buttonIndex] == null)
+            {
+                Debug.LogError("Sentences or scores array is null at index: " + buttonIndex);
+                return;
+            }
+
+            sentenceManager.SetSentences(researchSentences[buttonIndex], researchScores[buttonIndex], buttonIndex);
         }
-
-        sentenceManager.SetSentences(researchSentences[buttonIndex], researchScores[buttonIndex], buttonIndex);
+        else
+        {
+            Debug.LogError("One or more required components are not initialized.");
+        }
     }
-    else
+
+    void OnCompleteButtonClicked()
     {
-        Debug.LogError("One or more required components are not initialized.");
+        // 기존 로직...
+        int buttonScore = sentenceManager.CalculateButtonScore();
+        totalScore += buttonScore;
+        buttonCompletionStates[sentenceManager.CurrentButtonIndex] = true;
+        completedButtons++;
+
+        // 현재 주제의 텍스트 패널을 비활성화
+        textPanel.SetActive(false);
+
+        completeButton.gameObject.SetActive(false);
+
+
+        if (completedButtons == researchButtons.Length)
+        {
+            EndResearchGame();
+        }
     }
-}
-
-void OnCompleteButtonClicked()
-{
-    // 기존 로직...
-    int buttonScore = sentenceManager.CalculateButtonScore();
-    totalScore += buttonScore;
-    buttonCompletionStates[sentenceManager.CurrentButtonIndex] = true;
-    completedButtons++;
-
-    // 현재 주제의 텍스트 패널을 비활성화
-    textPanel.SetActive(false);
-
-
-    if (completedButtons == researchButtons.Length)
-    {
-        EndResearchGame();
-    }
-}
 
     void EndResearchGame()
     {
@@ -157,19 +159,19 @@ void OnCompleteButtonClicked()
     }
 
     void StartNextGame()
-{
-    if (slidesManager != null)
     {
-        Debug.Log("Starting next game...");
-        this.gameObject.SetActive(false);
-        slidesManager.gameObject.SetActive(true);
+        if (slidesManager != null)
+        {
+            Debug.Log("Starting next game...");
+            this.gameObject.SetActive(false);
+            slidesManager.gameObject.SetActive(true);
 
-        // 슬라이드 게임을 시작
-        slidesManager.StartSlidesGame();
+            // 슬라이드 게임을 시작
+            slidesManager.StartSlidesGame();
+        }
+        else
+        {
+            Debug.LogError("slidesManager is not set!");
+        }
     }
-    else
-    {
-        Debug.LogError("slidesManager is not set!");
-    }
-}
 }
