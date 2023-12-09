@@ -125,10 +125,10 @@ public class PresentationManager : MonoBehaviour
 
     public void OnOptionButtonClicked(int buttonIndex)
     {
-        int slideIndex = currentSlideIndex / 8;
+        int slideIndex = currentSlideIndex % 8;
         int score = buttonScores[slideIndex, buttonIndex];
         totalScore += score; // 선택된 버튼의 점수 추가
-
+        Debug.Log($"slideIndex: {slideIndex} / score: {score} / total : {totalScore}");
         foreach (Button button in optionButtons)
         {
             button.gameObject.SetActive(false);
